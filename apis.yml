@@ -1,0 +1,37 @@
+aid: env0
+name: env0
+description: >-
+  env0 is an infrastructure-as-code automation platform providing cost
+  estimation, policy enforcement, and self-service environments.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - FinOps
+  - Infrastructure as Code
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/env0/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: env0:env0
+    name: env0
+    description: >-
+      env0 is an infrastructure-as-code automation platform providing cost
+      estimation, policy enforcement, and self-service environments.
+    humanURL: https://www.env0.com/
+    tags:
+      - FinOps
+    properties:
+      - type: Documentation
+        url: https://docs.env0.com/
+      - type: Getting Started
+        url: https://docs.env0.com/
+common:
+  - type: Website
+    url: https://www.env0.com/
+  - type: Documentation
+    url: https://docs.env0.com/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
