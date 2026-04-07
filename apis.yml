@@ -1,5 +1,5 @@
 aid: env0
-name: env0
+name: Env0
 description: >-
   env0 is an infrastructure-as-code automation platform providing cost
   estimation, policy enforcement, and self-service environments.
@@ -15,7 +15,7 @@ modified: '2026-03-27'
 specificationVersion: '0.19'
 apis:
   - aid: env0:env0
-    name: env0
+    name: Env0
     description: >-
       env0 is an infrastructure-as-code automation platform providing cost
       estimation, policy enforcement, and self-service environments.
