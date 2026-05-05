@@ -1,0 +1,13 @@
+{
+  "repo": "env0",
+  "feeds": [
+    {
+      "source": "https://www.env0.com/blog",
+      "feed_url": "https://www.env0.com/blog/rss.xml",
+      "saved": 10,
+      "title": "The env0 Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:27:52Z"
+}
