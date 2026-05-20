@@ -40,6 +40,8 @@ apis:
       - type: Authentication
         url: https://docs.env0.com/reference/authentication
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/env0
   - type: Website
     url: https://www.env0.com/
   - type: Documentation
