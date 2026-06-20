@@ -5,7 +5,7 @@ description: >-
   estimation, policy enforcement, and self-service environments for
   Terraform, OpenTofu, Pulumi, CloudFormation, and Kubernetes workloads.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - FinOps
   - Infrastructure as Code
