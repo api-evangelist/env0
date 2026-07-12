@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/env0-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication. Username is the env0 API Key ID and the password is
+    the API Key Secret, both created in the env0 organization settings.
+  sources:
+  - openapi/env0-openapi.yml

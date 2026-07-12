@@ -40,6 +40,10 @@ apis:
       - type: Authentication
         url: https://docs.env0.com/reference/authentication
 common:
+  - type: DomainSecurity
+    url: security/env0-domain-security.yml
+  - type: Authentication
+    url: authentication/env0-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/env0
   - type: Website
