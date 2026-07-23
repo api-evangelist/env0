@@ -1,0 +1,50 @@
+openapi: 3.1.0
+info:
+  title: env0 Agents Organizations API
+  version: 1.0.0
+  description: REST API for the env0 infrastructure-as-code automation platform. Provides programmatic access to organizations, projects, environments, deployments, templates, modules, agents, configuration variables, credentials, RBAC, approval policies, and VCS provider mappings. Rate limited to 1,000 requests per 60 seconds. Best-effort spec derived from publicly documented surfaces; not exhaustive.
+  contact:
+    name: env0 Support
+    url: https://docs.envzero.com/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.env0.com
+  description: env0 API production base URL
+security:
+- basicAuth: []
+tags:
+- name: Organizations
+paths:
+  /organizations:
+    get:
+      tags:
+      - Organizations
+      summary: List organizations the user belongs to
+      operationId: listOrganizations
+      responses:
+        '200':
+          description: Organizations list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+components:
+  schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Username is the env0 API Key ID and the password is the API Key Secret, both created in the env0 organization settings.

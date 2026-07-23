@@ -1,0 +1,46 @@
+openapi: 3.1.0
+info:
+  title: env0 Agents Users API
+  version: 1.0.0
+  description: REST API for the env0 infrastructure-as-code automation platform. Provides programmatic access to organizations, projects, environments, deployments, templates, modules, agents, configuration variables, credentials, RBAC, approval policies, and VCS provider mappings. Rate limited to 1,000 requests per 60 seconds. Best-effort spec derived from publicly documented surfaces; not exhaustive.
+  contact:
+    name: env0 Support
+    url: https://docs.envzero.com/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.env0.com
+  description: env0 API production base URL
+security:
+- basicAuth: []
+tags:
+- name: Users
+paths:
+  /users/me/vcs-provider-user-mappings:
+    get:
+      tags:
+      - Users
+      summary: Get current user's VCS provider account mappings
+      operationId: getUserVcsProviderMappings
+      responses:
+        '200':
+          description: List of VCS provider user mappings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    providerType:
+                      type: string
+                    providerUserId:
+                      type: string
+                    providerUserName:
+                      type: string
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Username is the env0 API Key ID and the password is the API Key Secret, both created in the env0 organization settings.

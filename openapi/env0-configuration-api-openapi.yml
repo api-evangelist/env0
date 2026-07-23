@@ -1,0 +1,76 @@
+openapi: 3.1.0
+info:
+  title: env0 Agents Configuration API
+  version: 1.0.0
+  description: REST API for the env0 infrastructure-as-code automation platform. Provides programmatic access to organizations, projects, environments, deployments, templates, modules, agents, configuration variables, credentials, RBAC, approval policies, and VCS provider mappings. Rate limited to 1,000 requests per 60 seconds. Best-effort spec derived from publicly documented surfaces; not exhaustive.
+  contact:
+    name: env0 Support
+    url: https://docs.envzero.com/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.env0.com
+  description: env0 API production base URL
+security:
+- basicAuth: []
+tags:
+- name: Configuration
+paths:
+  /configuration:
+    get:
+      tags:
+      - Configuration
+      summary: List configuration variables
+      operationId: listConfigurationVariables
+      parameters:
+      - in: query
+        name: organizationId
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        schema:
+          type: string
+      - in: query
+        name: environmentId
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Configuration variables list
+    post:
+      tags:
+      - Configuration
+      summary: Create or update a configuration variable
+      operationId: upsertConfigurationVariable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+                isSensitive:
+                  type: boolean
+                scope:
+                  type: string
+                  enum:
+                  - GLOBAL
+                  - ORGANIZATION
+                  - PROJECT
+                  - ENVIRONMENT
+                  - BLUEPRINT
+                  - DEPLOYMENT
+      responses:
+        '200':
+          description: Variable upserted
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Username is the env0 API Key ID and the password is the API Key Secret, both created in the env0 organization settings.
