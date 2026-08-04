@@ -1,0 +1,34 @@
+{
+  "provider": "env0",
+  "sources": [
+    "env0-agents-api-openapi.yml",
+    "env0-approvalpolicies-api-openapi.yml",
+    "env0-configuration-api-openapi.yml",
+    "env0-deployments-api-openapi.yml",
+    "env0-environments-api-openapi.yml",
+    "env0-modules-api-openapi.yml",
+    "env0-organizations-api-openapi.yml",
+    "env0-projects-api-openapi.yml",
+    "env0-templates-api-openapi.yml",
+    "env0-users-api-openapi.yml",
+    "env0-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "env0-agents-api-openapi.yml",
+    "env0-approvalpolicies-api-openapi.yml",
+    "env0-configuration-api-openapi.yml",
+    "env0-deployments-api-openapi.yml",
+    "env0-environments-api-openapi.yml",
+    "env0-modules-api-openapi.yml",
+    "env0-organizations-api-openapi.yml",
+    "env0-projects-api-openapi.yml",
+    "env0-templates-api-openapi.yml",
+    "env0-users-api-openapi.yml",
+    "env0-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
