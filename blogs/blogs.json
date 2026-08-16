@@ -2,10 +2,6 @@
   "repo": "env0",
   "feeds": [
     {
-      "source": "https://www.env0.com/blog/rss.xml",
-      "error": "HTTPError"
-    },
-    {
       "source": "https://www.env0.com/pricing",
       "feed_url": "https://www.env0.com/pricing",
       "title": "",
@@ -14,5 +10,5 @@
     }
   ],
   "post_count": 170,
-  "fetched": "2026-08-06T14:08:46Z"
+  "fetched": "2026-08-15T12:22:01Z"
 }
