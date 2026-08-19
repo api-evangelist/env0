@@ -1,0 +1,110 @@
+{
+  "item": [
+    {
+      "id": "d36bf33a-4d8d-463d-af51-ea15d92cbfcc",
+      "name": "Modules",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c88dd0e3-aaf3-4c67-9428-5103db0eddef",
+          "name": "List private modules",
+          "request": {
+            "name": "List private modules",
+            "description": {},
+            "url": {
+              "path": [
+                "modules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "642500f1-87e0-4d18-b16d-a1672025178e",
+              "name": "Modules list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "modules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.env0.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a36dff8a-b4b7-4bfb-9db9-3a3de7a5764c",
+    "name": "env0 Agents Modules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the env0 infrastructure-as-code automation platform. Provides programmatic access to organizations, projects, environments, deployments, templates, modules, agents, configuration variables, credentials, RBAC, approval policies, and VCS provider mappings. Rate limited to 1,000 requests per 60 seconds. Best-effort spec derived from publicly documented surfaces; not exhaustive.\n\nContact Support:\n Name: env0 Support",
+      "type": "text/plain"
+    }
+  }
+}

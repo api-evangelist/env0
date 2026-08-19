@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "env0 Agents Configuration API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List configuration variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.env0.com/configuration",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List configuration variables"
+        },
+        {
+          "info": {
+            "name": "Create or update a configuration variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.env0.com/configuration",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a configuration variable"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "env0 Agents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List self-hosted agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.env0.com/agents"
+          },
+          "docs": "List self-hosted agents"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

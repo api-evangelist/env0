@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "env0 Agents ApprovalPolicies API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ApprovalPolicies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List approval policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.env0.com/approval-policies"
+          },
+          "docs": "List approval policies"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
