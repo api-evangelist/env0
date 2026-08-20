@@ -86,6 +86,8 @@ apis:
   humanURL: https://www.env0.com/
   baseURL: https://api.env0.com/
   tags:
+  - Deployment
+  tags_raw:
   - Deployments
   properties:
   - type: OpenAPI
@@ -116,6 +118,8 @@ apis:
   humanURL: https://www.env0.com/
   baseURL: https://api.env0.com/
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -126,6 +130,8 @@ apis:
   humanURL: https://www.env0.com/
   baseURL: https://api.env0.com/
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -146,6 +152,8 @@ apis:
   humanURL: https://www.env0.com/
   baseURL: https://api.env0.com/
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -156,6 +164,8 @@ apis:
   humanURL: https://www.env0.com/
   baseURL: https://api.env0.com/
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
