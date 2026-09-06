@@ -1,0 +1,119 @@
+generated: '2026-09-06'
+method: searched
+source: registry.npmjs.org, registry.terraform.io, proxy.golang.org, hub.docker.com, GitHub releases
+note: >-
+  CURRENCY FINDING. The npm `latest` dist-tag on @env0/cli still points at 1.0.25 (2026-04-20),
+  the version env zero's own docs mark DEPRECATED. The current CLI is 2.4.0 (2026-08-12) and is
+  published only under the `next` dist-tag, so `npm install -g @env0/cli` installs the
+  deprecated v1 unless the consumer knows to pin `@2`. The docs do say `npm install -g @env0/cli@2`.
+packages:
+- language: shell
+  registry: homebrew
+  name: env0/tap/env0
+  url: https://github.com/env0/homebrew-tap
+  install: brew install env0/tap/env0
+  official: true
+  version: 2.4.0
+  published: '2026-08-12'
+  version_source: https://api.github.com/repos/env0/homebrew-tap/releases/latest (tag cli-v2.4.0)
+  note: the current single-binary env zero CLI; binaries also attached to the GitHub release.
+- language: javascript
+  registry: npm
+  name: '@env0/cli'
+  url: https://www.npmjs.com/package/@env0/cli
+  install: npm install -g @env0/cli@2
+  official: true
+  version: 2.4.0
+  published: '2026-08-12'
+  dist_tag: next
+  latest_dist_tag_version: 1.0.25
+  latest_dist_tag_published: '2026-04-20'
+  deprecated_line: 1.x (the Node CLI) - superseded by the single binary
+  note: '`latest` resolves to the deprecated 1.0.25; 2.4.0 ships under the `next` tag.'
+- language: hcl
+  registry: terraform-registry
+  name: env0/env0
+  url: https://registry.terraform.io/providers/env0/env0/latest
+  install: 'terraform { required_providers { env0 = { source = "env0/env0" } } }'
+  official: true
+  version: 1.32.2
+  published: '2026-08-30'
+  downloads: 9354957
+  source_code: https://github.com/env0/terraform-provider-env0
+- language: go
+  registry: go-modules
+  name: github.com/env0/terratag
+  url: https://pkg.go.dev/github.com/env0/terratag
+  install: go install github.com/env0/terratag/cmd/terratag@latest
+  official: true
+  version: v0.7.7
+  published: '2026-09-06'
+  note: Terratag - env zero's open-source CLI for applying consistent tags across Terraform,
+    Terragrunt, AWS, Azure and GCP resources. A companion tool, not a client library for the API.
+- language: shell
+  registry: homebrew
+  name: env0/terratag/terratag
+  url: https://github.com/env0/homebrew-terratag
+  install: brew install env0/terratag/terratag
+  official: true
+  version: v0.7.7
+  published: '2026-09-06'
+- language: docker
+  registry: dockerhub
+  name: env0/mcp-server
+  url: https://hub.docker.com/r/env0/mcp-server
+  install: 'docker run -i --rm -e ENV0_API_KEY=<key> -e ENV0_API_SECRET=<secret> -e ENV0_ORGANIZATION_ID=<org> env0/mcp-server'
+  official: true
+  version: 1.1.2
+  published: '2026-09-02'
+  source_code: https://github.com/env0/mcp-server
+  note: the official env zero MCP server; distributed as a container, not as an npm/PyPI package.
+- language: typescript
+  registry: npm
+  name: '@env0/backstage-plugin-env0'
+  url: https://www.npmjs.com/package/@env0/backstage-plugin-env0
+  install: yarn add @env0/backstage-plugin-env0
+  official: true
+  version: 0.2.1
+  published: '2025-02-11'
+  source_code: https://github.com/env0/env0-backstage-plugin
+  note: Backstage IDP plugin. Last published 2025-02-11 - 19 months behind the platform at the
+    time of this pass.
+- language: helm
+  registry: github
+  name: env0 self-hosted agent chart
+  url: https://github.com/env0/self-hosted
+  install: helm repo add env0 https://env0.github.io/self-hosted
+  official: true
+  version: null
+  published: null
+  note: 'version: null - the chart is served from a GitHub Pages Helm repo with no registry
+    metadata endpoint this pass could query unauthenticated. Repo last updated 2026-08-30.'
+absent_registries:
+- registry: pypi
+  result: no first-party env0/envzero client library found
+- registry: rubygems
+  result: none
+- registry: nuget
+  result: none
+- registry: maven-central
+  result: none
+- registry: crates.io
+  result: none
+- registry: packagist
+  result: none
+summary:
+  official_packages: 8
+  official_client_libraries: 2
+  client_libraries:
+  - env0/env0 (Terraform provider, Go, a first-party client of api.env0.com)
+  - '@env0/backstage-plugin-env0 (TypeScript)'
+  generic_rest_sdk: false
+  note: >-
+    env zero ships NO conventional general-purpose REST SDK (no PyPI, RubyGems, NuGet, Maven or
+    crates.io package, and nothing on npm beyond the CLI and the Backstage plugin). What it does
+    ship, all first-party: a single-binary CLI on Homebrew and npm, a Terraform provider that is
+    itself a client of api.env0.com and by far the most-used surface (9.35M downloads), an MCP
+    server distributed as a container, a Backstage plugin, and a Helm chart for the self-hosted
+    agent. A developer wanting to call the REST API from an arbitrary language writes the HTTP
+    calls themselves.

@@ -1,0 +1,112 @@
+generated: '2026-09-06'
+method: searched
+source: https://docs.envzero.com/guides/community-and-resources/support-and-help/env-zero-cli
+docs: https://docs.envzero.com/guides/community-and-resources/support-and-help/env-zero-cli
+name: env0
+current_major: 2
+current_version: 2.4.0
+released: '2026-08-12'
+summary: >-
+  A single binary for managing environments and deployments from a terminal or CI. Reads
+  environments, deployments, plans, projects and templates; acts on them with create, deploy,
+  destroy, approve, cancel and abort. JSON on stdout, errors on stderr, stable exit codes.
+install:
+- method: homebrew
+  command: brew install env0/tap/env0
+  platforms: [macos, linux]
+- method: npm
+  command: npm install -g @env0/cli@2
+- method: binary
+  url: https://github.com/env0/homebrew-tap/releases/latest
+verify: env0 version
+authentication:
+  interactive:
+    command: env0 login
+    flow: browser device-code style confirmation, then choose a default organization and project
+    session_storage: OS keychain where available
+    flags: ['--no-browser']
+    related: [env0 status, env0 logout]
+  non_interactive:
+    env:
+    - ENV0_API_KEY_ID
+    - ENV0_API_SECRET
+    flags: ['--api-key-id', '--api-key-secret']
+    note: any env zero API key works; secret is shown once at creation.
+  read_only_session: true
+  read_only_note: sign in to a read-only session so a teammate or an AI agent can inspect without
+    being able to change anything.
+environment_variables:
+  current:
+  - ENV0_API_KEY_ID
+  - ENV0_API_SECRET
+  - ENV0_ORGANIZATION_ID
+  - ENV0_PROJECT_ID
+  - ENV0_API_URL
+  removed_in_v2:
+  - ENV0_ENVIRONMENT_NAME
+  - ENV0_BLUEPRINT_ID
+  renamed_in_v2:
+  - {from: ENV0_API_KEY, to: ENV0_API_KEY_ID}
+  - {from: ENV0_API_SECRET, to: ENV0_API_KEY_SECRET}
+commands:
+- group: environment
+  commands:
+  - {command: 'env0 environment create', note: 'provisions a new environment and starts its first deployment; --name --project --template or --repository/--type/--organization; --wait'}
+  - {command: 'env0 environment deploy <environment-id>', note: 'runs a new deployment on an existing environment; --wait, --requires-approval'}
+  - {command: 'env0 environment destroy <environment-id> --yes', note: 'destroys real infrastructure; requires confirmation'}
+  - {command: 'env0 environment list --project <project-id>', note: '--name to filter; -o compact|table'}
+- group: deployment
+  commands:
+  - {command: 'env0 deployment list --environment <environment-id> --limit 1'}
+  - {command: 'env0 deployment approve <deployment-id>'}
+  - {command: 'env0 deployment cancel <deployment-id>'}
+  - {command: 'env0 deployment abort <deployment-id>', note: 'stops a running deployment'}
+  - {command: 'env0 deployment logs <deployment-id>', note: '--follow streams live logs'}
+- group: project
+  commands:
+  - {command: 'env0 project create'}
+  - {command: 'env0 project archive'}
+  - {command: 'env0 project use <project-id>'}
+- group: context
+  commands:
+  - {command: 'env0 context <environment-id>', note: 'one call returning state, recent deployments and a drift or failure summary'}
+- group: skill
+  commands:
+  - {command: 'env0 skill install', note: 'writes a usage guide into a coding agent config; --agent cursor|codex|copilot, --global, --path. Claude Code by default.'}
+  - {command: 'env0 skill show'}
+  - {command: 'env0 skill uninstall'}
+- group: session
+  commands:
+  - {command: 'env0 login'}
+  - {command: 'env0 status'}
+  - {command: 'env0 logout'}
+  - {command: 'env0 version'}
+output:
+  default: json on stdout
+  formats: [json, compact, table]
+  errors_to: stderr
+  exit_codes:
+  - {code: 0, meaning: success}
+  - {code: 3, meaning: auth}
+  - {code: 4, meaning: not found}
+  exit_codes_note: env zero documents 0, 3 and 4 explicitly and says the set is stable ("and so
+    on"); the full table is not published.
+agent_posture:
+  built_for_agents: true
+  evidence: >-
+    env zero markets the CLI for AI agents - JSON on stdout, errors on stderr, stable exit codes,
+    `env0 context` for one-request diagnosis, `env0 skill install` to teach a coding agent the
+    command surface, and a read-only sign-in mode for agents that should not mutate.
+deprecated:
+  package: '@env0/cli'
+  versions: 1.x
+  status: deprecated
+  pin_to_stay: npm install -g @env0/cli@^1
+  migration_guide: https://docs.envzero.com/guides/community-and-resources/support-and-help/env-zero-cli#migration-from-v1
+  drop_in_replacement: false
+other_first_party_clis:
+- name: terratag
+  purpose: apply consistent tags across Terraform/Terragrunt AWS, Azure and GCP resources
+  repo: https://github.com/env0/terratag
+  version: v0.7.7
+  docs: https://docs.envzero.com/guides/community-and-resources/community-and-open-source/terratag

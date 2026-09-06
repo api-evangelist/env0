@@ -29,6 +29,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "env0-agents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-approvalpolicies-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-configuration-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-deployments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-environments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-modules-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-organizations-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-projects-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-templates-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-users-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "env0-webhooks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

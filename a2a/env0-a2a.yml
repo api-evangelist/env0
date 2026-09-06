@@ -1,0 +1,53 @@
+generated: '2026-09-06'
+method: probed
+source: https://docs.envzero.com/.well-known/agent-card.json
+note: >-
+  env0 rebranded to "env zero" and moved its primary web + docs properties to envzero.com
+  (www.env0.com 301s to www.envzero.com, docs.env0.com 301s to docs.envzero.com). The agent
+  card is served from the docs host, not the registrable domain; env0.com, www.env0.com,
+  envzero.com, www.envzero.com, api.env0.com and status.env0.com all 404 both agent-card paths.
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: docs.envzero.com
+  legacy_path_probed: /.well-known/agent.json
+  legacy_path_status: 404
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: '0.3'
+  preferred_transport: HTTP+JSON
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  deviations:
+  - supportedInterfaces-instead-of-additionalInterfaces
+card:
+  name: env zero docs
+  url: https://docs.envzero.com/
+  version: 1.0.0
+  skills: 1
+  file: env0-agent-card.json
+  provider_organization: env zero docs
+  documentation_url: https://docs.envzero.com/
+  default_input_modes:
+  - text/plain
+  default_output_modes:
+  - text/plain
+skills:
+- id: envzero
+  name: Envzero
+  url: https://docs.envzero.com/.well-known/agent-skills/envzero/skill.md
+  saved_as: skills/env0-envzero.md
+  http_status: 200
+x-evidence:
+  fetched: '2026-09-06'
+  url: https://docs.envzero.com/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  bytes: 983
+  negative_control:
+    url: https://docs.envzero.com/.well-known/env0-negative-control-7f3ab91c.json
+    status: 404
+    result: passed

@@ -1,70 +1,6 @@
 # Env0 (env0)
 
-<!-- API-EVANGELIST-PROVENANCE:BEGIN -->
-> ### About this repository
->
-> **This is not our API.** This repository is an independent, third-party profile of a company's
-> **publicly available** API surface, maintained by [API Evangelist](https://apievangelist.com).
-> API Evangelist does not operate, host, resell, or support this company's APIs, and is not
-> affiliated with or endorsed by the company unless stated on the profile.
->
-> **Where the information came from.** Everything here is assembled from material a member of the
-> public can reach with a browser and no credentials — the company's own website, developer portal
-> and documentation, the specifications it publishes for public use (OpenAPI, AsyncAPI, JSON Schema,
-> `apis.json`, `llms.txt` and similar), its public repositories, and its public status, pricing and
-> changelog pages. **Nothing here is obtained by breaching a system, defeating an access control, or
-> using credentials of any kind.**
->
-> **The rating is an independent assessment.** The Kin Score and Agent Readiness rating are
-> independently calculated scores of a company's *public* API artifacts, produced by API Evangelist
-> against a published rubric. They are not certifications, endorsements, security assessments, or
-> audits, and they score published artifacts — not the quality, safety, or security of the software.
->
-> **Corrections, re-scores, and removal are free.** No partnership, contract, or purchase is
-> required, and you do not need to justify the request.
->
-> - **Something wrong?** Open an issue on this repository, or email
->   [info@apievangelist.com](mailto:info@apievangelist.com).
-> - **Published something new?** Ask for a re-score and we will re-run the rating.
-> - **Want the listing taken down?** Say so and we will honor it. The profile is reduced to your
->   company name, a factual description, and a link to your own site, and the company is recorded as
->   **unrated** — never scored zero for having asked.
->
-> **Response times.** Acknowledgement within **one business day**; removal or restriction within
-> **two business days**; corrections and re-scores within **five business days**.
->
-> **Not from the company, and here with a question?** You are welcome here — we would rather be the
-> front line and point you the right way than have a good report go nowhere. What this repository
-> can answer is narrow, though, so it is worth knowing who you are actually looking for:
->
-> - **A question about how the API works, an account, billing, or a bug in the service** — that is
->   the company's own support, not us. We profile this API; we do not operate it and cannot see
->   your account.
-> - **A bug in an open-source project we only catalog** — file it on that project's own repository.
->   This has happened with a real and correct bug report that reached us instead of the people who
->   could fix it, which helped nobody.
-> - **Anything about this listing itself** — the description, the tags, the rating, a missing or
->   wrong artifact — is ours. Open an issue here.
-> - **Not sure, or something general about API Evangelist or APIs.io** — open an issue on the
->   [APIs.io Inbox](https://github.com/api-search/inbox) and we will route it.
->
-> **This repository contains no software, and we will never ask you to download anything.** There is
-> no build, release, installer, or binary here — only text and machine-readable API descriptions, so
-> there is nothing here that can be "corrupt" or need "repairing". Any issue, comment, or email
-> claiming otherwise and offering a download link is not from us and is hostile. Do not follow the
-> link; it is a lure. Report it to GitHub and, if you like, tell us at
-> [info@apievangelist.com](mailto:info@apievangelist.com) so we can take it down.
->
-> **On a security or compliance team?** Email
-> [info@apievangelist.com](mailto:info@apievangelist.com) with *security* in the subject line and
-> you will get a person, not a form. We will tell you exactly which public URLs this profile was
-> built from so your team can see the same surface we did, and we will take the listing down on
-> request while you work through it.
->
-> Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
-<!-- API-EVANGELIST-PROVENANCE:END -->
-
-env0 is an infrastructure-as-code automation platform providing cost estimation, policy enforcement, and self-service environments for Terraform, OpenTofu, Pulumi, CloudFormation, and Kubernetes workloads.
+env0 -- now trading as "env zero" -- is an infrastructure-as-code automation and cloud governance platform for Terraform, OpenTofu, Terragrunt, Pulumi, CloudFormation, Kubernetes and Helm. It provisions and manages cloud environments from reusable templates, orchestrates multi-environment workflows with dependencies, enforces custom approval and guardrail policies, detects and remediates infrastructure drift, runs a private module and provider registry, and adds cost estimation, actual-cost visibility and budget thresholds on top. The public REST API at https://api.env0.com publishes 327 operations across 30 areas and authenticates with HTTP Basic using an API Key ID and Secret. env zero also ships a first-party CLI, a Terraform provider, an official MCP server, a published Agent Skill and a conformant A2A agent card.
 
 **APIs.json:** [https://raw.githubusercontent.com/api-evangelist/env0/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/env0/refs/heads/main/apis.yml)
 
@@ -78,11 +14,16 @@ env0 is an infrastructure-as-code automation platform providing cost estimation,
 - Infrastructure as Code
 - DevOps
 - Cloud
+- Terraform
+- OpenTofu
+- Platform Engineering
+- Cloud Governance
+- Drift Detection
 
 ## Timestamps
 
 - **Created:** 2026-03-27
-- **Modified:** 2026-04-28
+- **Modified:** 2026-09-06
 
 ## APIs
 
@@ -90,7 +31,7 @@ env0 is an infrastructure-as-code automation platform providing cost estimation,
 
 env0 is an infrastructure-as-code automation platform providing cost estimation, policy enforcement, and self-service environments. The public REST API is available at https://api.env0.com/ and uses HTTP Basic authentication with API key credentials. Rate limits are 1,000 requests per 60 seconds.
 
-- **Human URL:** [https://www.env0.com/](https://www.env0.com/)
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
 - **Base URL:** `https://api.env0.com/`
 
 #### Tags
@@ -100,22 +41,261 @@ env0 is an infrastructure-as-code automation platform providing cost estimation,
 
 #### Properties
 
-- [Documentation](https://docs.env0.com/)
-- [API Reference](https://docs.env0.com/reference/api-introduction)
-- [Getting Started](https://docs.env0.com/docs/getting-started)
-- [Authentication](https://docs.env0.com/reference/authentication)
+- [Documentation](https://docs.envzero.com/)
+- [API Reference](https://docs.envzero.com/api-reference)
+- [Getting Started](https://docs.envzero.com/guides/getting-started/getting-started)
+- [Authentication](https://docs.envzero.com/guides/admin-guide/user-role-and-team-management/api-keys)
+- [M C P Server](mcp/env0-mcp.yml)
+- [Tool Crosswalk](mcp/env0-tool-crosswalk.yml)
+- [Postman Collection](collections/env0-agents-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-agents-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-approvalpolicies-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-approvalpolicies-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-configuration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-configuration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-deployments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-deployments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-environments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-environments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-modules-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-modules-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-organizations-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-organizations-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-projects-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-projects-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-templates-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-templates-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-users-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-users-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/env0-webhooks-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-webhooks-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 - [Postman Collection](collections/env0.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
 - [Open Collection](collections/env0.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
+### Env0 Agents API
+
+The Agents API from Env0 — 1 operation(s) for agents.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- Agents
+
+#### Properties
+
+- [OpenAPI](openapi/env0-agents-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-agents-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-agents-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 ApprovalPolicies API
+
+The ApprovalPolicies API from Env0 — 1 operation(s) for approvalpolicies.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- ApprovalPolicies
+
+#### Properties
+
+- [OpenAPI](openapi/env0-approvalpolicies-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-approvalpolicies-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-approvalpolicies-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 Configuration API
+
+The Configuration API from Env0 — 1 operation(s) for configuration.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- Configuration
+
+#### Properties
+
+- [OpenAPI](openapi/env0-configuration-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-configuration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-configuration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 Deployments API
+
+The Deployments API from Env0 — 2 operation(s) for deployments.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- Deployment
+
+#### Properties
+
+- [OpenAPI](openapi/env0-deployments-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-deployments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-deployments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 Environments API
+
+The Environments API from Env0 — 2 operation(s) for environments.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- Environments
+
+#### Properties
+
+- [OpenAPI](openapi/env0-environments-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-environments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-environments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 Modules API
+
+The Modules API from Env0 — 1 operation(s) for modules.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- Modules
+
+#### Properties
+
+- [OpenAPI](openapi/env0-modules-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-modules-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-modules-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 Organizations API
+
+The Organizations API from Env0 — 1 operation(s) for organizations.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- Organization
+
+#### Properties
+
+- [OpenAPI](openapi/env0-organizations-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-organizations-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-organizations-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 Projects API
+
+The Projects API from Env0 — 2 operation(s) for projects.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- Project
+
+#### Properties
+
+- [OpenAPI](openapi/env0-projects-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-projects-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-projects-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 Templates API
+
+The Templates API from Env0 — 1 operation(s) for templates.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- Templates
+
+#### Properties
+
+- [OpenAPI](openapi/env0-templates-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-templates-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-templates-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 Users API
+
+The Users API from Env0 — 1 operation(s) for users.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- User
+
+#### Properties
+
+- [OpenAPI](openapi/env0-users-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-users-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-users-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Env0 Webhooks API
+
+The Webhooks API from Env0 — 1 operation(s) for webhooks.
+
+- **Human URL:** [https://www.envzero.com/](https://www.envzero.com/)
+- **Base URL:** `https://api.env0.com/`
+
+#### Tags
+
+- Webhook
+
+#### Properties
+
+- [OpenAPI](openapi/env0-webhooks-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/env0-webhooks-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/env0-webhooks-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
 ## Common Properties
 
+- [Agentic Access](agentic-access/env0-agentic-access.yml)
+- [Domain Security](security/env0-domain-security.yml)
+- [Authentication](authentication/env0-authentication.yml)
 - [LinkedIn](https://www.linkedin.com/company/env0)
-- [Website](https://www.env0.com/)
-- [Documentation](https://docs.env0.com/)
-- [API Reference](https://docs.env0.com/reference/api-introduction)
-- [Pricing](https://www.env0.com/pricing)
-- [Blog](https://www.env0.com/blog)
-- [Git Hub](https://github.com/env0)
+- [Website](https://www.envzero.com/)
+- [Developer Portal](https://docs.envzero.com/)
+- [Documentation](https://docs.envzero.com/)
+- [API Reference](https://docs.envzero.com/api-reference)
+- [Getting Started](https://docs.envzero.com/guides/getting-started/getting-started)
+- [Support](https://docs.envzero.com/guides/community-and-resources/support-and-help/support)
+- [Pricing](https://www.envzero.com/pricing)
+- [Sign Up](https://app.env0.com/)
+- [Terms of Service](https://www.envzero.com/terms-and-conditions)
+- [Privacy Policy](https://www.envzero.com/privacy-policy)
+- [Blog](https://www.envzero.com/resources)
+- [GitHub Organization](https://github.com/env0)
+- [Status Page](https://status.env0.com)
+- [Compliance](https://docs.envzero.com/guides/overview/security-overview)
+- [L L Ms Txt](llms/env0-llms.txt)
+- [Agent Card](a2a/env0-a2a.yml)
+- [Agent Skill](skills/_index.yml)
+- [Well Known](well-known/env0-well-known.yml)
+- [M C P Server](mcp/env0-mcp.yml)
+- [Packages](packages/env0-packages.yml)
+- [S D Ks](packages/env0-packages.yml)
+- [C L I](cli/env0-cli.yml)
+- [Changelog](changelog/env0-changelog.yml)
+- [Lifecycle](lifecycle/env0-lifecycle.yml)
+- [Conventions](conventions/env0-conventions.yml)
+- [Conformance](conformance/env0-conformance.yml)
+- [Trust Center](security/env0-trust-center.yml)
+- [Webhooks](asyncapi/env0-webhooks.yml)
+- [Data Model](data-model/env0-data-model.yml)
+- [Plans](plans/env0-plans-pricing.yml)
+- [Rate Limits](rate-limits/env0-rate-limits.yml)
 
 ## Maintainers
 

@@ -1,0 +1,308 @@
+generated: '2026-09-06'
+method: probed
+source: live probe of the named /.well-known path list plus /apis.json and /apis.yml
+note: env0 rebranded to "env zero"; the web and docs properties moved to envzero.com. Every host the record
+  knows was probed. The only real document served anywhere on this provider's /.well-known/ surface is
+  the A2A agent card on docs.envzero.com. No security.txt, no OAuth/OIDC discovery, no api-catalog, no
+  apis.json. app.env0.com is a single-page-app catch-all that answers 200 with the same HTML shell for
+  every path including a random control, so nothing there is recorded as a document.
+hosts:
+- host: https://env0.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 301
+  - path: /apis.yml
+    status: 301
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  hit_count: 0
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/env0-negative-control-7f3ab91c.json
+    status: 404
+- host: https://www.env0.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 301
+  - path: /apis.yml
+    status: 301
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  hit_count: 0
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/env0-negative-control-7f3ab91c.json
+    status: 404
+- host: https://envzero.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 301
+  - path: /apis.yml
+    status: 301
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  hit_count: 0
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/env0-negative-control-7f3ab91c.json
+    status: 404
+- host: https://www.envzero.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  hit_count: 0
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/env0-negative-control-7f3ab91c.json
+    status: 404
+- host: https://api.env0.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/ucp.json
+    status: 403
+  - path: /.well-known/acp.json
+    status: 403
+  - path: /.well-known/aauth-resource.json
+    status: 403
+  - path: /.well-known/apis.json
+    status: 403
+  - path: /apis.json
+    status: 403
+  - path: /apis.yml
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+  hit_count: 0
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/env0-negative-control-7f3ab91c.json
+    status: 403
+- host: https://docs.envzero.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: env0-agent-card.json
+  - path: /.well-known/agent.json
+    status: 404
+  hit_count: 1
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/env0-negative-control-7f3ab91c.json
+    status: 404
+- host: https://app.env0.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/api-catalog
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/ucp.json
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/acp.json
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/apis.json
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /apis.json
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /apis.yml
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  - path: /.well-known/agent.json
+    status: 200
+    note: HTML SPA shell returned for every path on this host - not a document
+  hit_count: 0
+  path_echo_control: failed
+  soft_404_control:
+    path: /.well-known/env0-negative-control-7f3ab91c.json
+    status: 200
+    bytes: 3725
+    content_type: text/html
+  note: 'Single-page-app catch-all: every /.well-known/* path, /apis.json and a random control path all
+    return the same 3725-byte HTML shell. No documents recorded.'
+- host: https://status.env0.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  hit_count: 0
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/env0-negative-control-7f3ab91c.json
+    status: 404

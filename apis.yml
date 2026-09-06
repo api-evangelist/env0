@@ -1,9 +1,16 @@
 aid: env0
 name: Env0
 description: >-
-  env0 is an infrastructure-as-code automation platform providing cost
-  estimation, policy enforcement, and self-service environments for
-  Terraform, OpenTofu, Pulumi, CloudFormation, and Kubernetes workloads.
+  env0 -- now trading as "env zero" -- is an infrastructure-as-code automation and cloud
+  governance platform for Terraform, OpenTofu, Terragrunt, Pulumi, CloudFormation, Kubernetes
+  and Helm. It provisions and manages cloud environments from reusable templates, orchestrates
+  multi-environment workflows with dependencies, enforces custom approval and guardrail
+  policies, detects and remediates infrastructure drift, runs a private module and provider
+  registry, and adds cost estimation, actual-cost visibility and budget thresholds on top.
+  The public REST API at https://api.env0.com publishes 327 operations across 30 areas and
+  authenticates with HTTP Basic using an API Key ID and Secret. env zero also ships a
+  first-party CLI, a Terraform provider, an official MCP server, a published Agent Skill and a
+  conformant A2A agent card.
 type: Index
 deliveryModel:
   model: saas
@@ -38,10 +45,15 @@ tags:
   - Infrastructure as Code
   - DevOps
   - Cloud
+  - Terraform
+  - OpenTofu
+  - Platform Engineering
+  - Cloud Governance
+  - Drift Detection
 url: >-
   https://raw.githubusercontent.com/api-evangelist/env0/refs/heads/main/apis.yml
 created: '2026-03-27'
-modified: '2026-04-28'
+modified: '2026-09-06'
 specificationVersion: '0.23'
 apis:
 - aid: env0:env0
@@ -50,24 +62,28 @@ apis:
     env0 is an infrastructure-as-code automation platform providing cost estimation, policy enforcement,
     and self-service environments. The public REST API is available at https://api.env0.com/ and uses
     HTTP Basic authentication with API key credentials. Rate limits are 1,000 requests per 60 seconds.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - FinOps
   - Infrastructure as Code
   properties:
   - type: Documentation
-    url: https://docs.env0.com/
+    url: https://docs.envzero.com/
   - type: APIReference
-    url: https://docs.env0.com/reference/api-introduction
+    url: https://docs.envzero.com/api-reference
   - type: GettingStarted
-    url: https://docs.env0.com/docs/getting-started
+    url: https://docs.envzero.com/guides/getting-started/getting-started
   - type: Authentication
-    url: https://docs.env0.com/reference/authentication
+    url: https://docs.envzero.com/guides/admin-guide/user-role-and-team-management/api-keys
+  - type: MCPServer
+    url: mcp/env0-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/env0-tool-crosswalk.yml
 - aid: env0:env0-agents-api
   name: Env0 Agents API
   description: The Agents API from Env0 — 1 operation(s) for agents.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - Agents
@@ -77,7 +93,7 @@ apis:
 - aid: env0:env0-approvalpolicies-api
   name: Env0 ApprovalPolicies API
   description: The ApprovalPolicies API from Env0 — 1 operation(s) for approvalpolicies.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - ApprovalPolicies
@@ -87,7 +103,7 @@ apis:
 - aid: env0:env0-configuration-api
   name: Env0 Configuration API
   description: The Configuration API from Env0 — 1 operation(s) for configuration.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - Configuration
@@ -97,7 +113,7 @@ apis:
 - aid: env0:env0-deployments-api
   name: Env0 Deployments API
   description: The Deployments API from Env0 — 2 operation(s) for deployments.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - Deployment
@@ -109,7 +125,7 @@ apis:
 - aid: env0:env0-environments-api
   name: Env0 Environments API
   description: The Environments API from Env0 — 2 operation(s) for environments.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - Environments
@@ -119,7 +135,7 @@ apis:
 - aid: env0:env0-modules-api
   name: Env0 Modules API
   description: The Modules API from Env0 — 1 operation(s) for modules.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - Modules
@@ -129,7 +145,7 @@ apis:
 - aid: env0:env0-organizations-api
   name: Env0 Organizations API
   description: The Organizations API from Env0 — 1 operation(s) for organizations.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - Organization
@@ -141,7 +157,7 @@ apis:
 - aid: env0:env0-projects-api
   name: Env0 Projects API
   description: The Projects API from Env0 — 2 operation(s) for projects.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - Project
@@ -153,7 +169,7 @@ apis:
 - aid: env0:env0-templates-api
   name: Env0 Templates API
   description: The Templates API from Env0 — 1 operation(s) for templates.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - Templates
@@ -163,7 +179,7 @@ apis:
 - aid: env0:env0-users-api
   name: Env0 Users API
   description: The Users API from Env0 — 1 operation(s) for users.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - User
@@ -175,7 +191,7 @@ apis:
 - aid: env0:env0-webhooks-api
   name: Env0 Webhooks API
   description: The Webhooks API from Env0 — 1 operation(s) for webhooks.
-  humanURL: https://www.env0.com/
+  humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
   - Webhook
@@ -194,17 +210,72 @@ common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/env0
   - type: Website
-    url: https://www.env0.com/
+    url: https://www.envzero.com/
+  - type: DeveloperPortal
+    url: https://docs.envzero.com/
   - type: Documentation
-    url: https://docs.env0.com/
+    url: https://docs.envzero.com/
   - type: APIReference
-    url: https://docs.env0.com/reference/api-introduction
+    url: https://docs.envzero.com/api-reference
+  - type: GettingStarted
+    url: https://docs.envzero.com/guides/getting-started/getting-started
+  - type: Support
+    url: https://docs.envzero.com/guides/community-and-resources/support-and-help/support
   - type: Pricing
-    url: https://www.env0.com/pricing
+    url: https://www.envzero.com/pricing
+  - type: SignUp
+    url: https://app.env0.com/
+  - type: TermsOfService
+    url: https://www.envzero.com/terms-and-conditions
+  - type: PrivacyPolicy
+    url: https://www.envzero.com/privacy-policy
   - type: Blog
-    url: https://www.env0.com/blog
-  - type: GitHub
+    url: https://www.envzero.com/resources
+  - type: GitHubOrganization
     url: https://github.com/env0
+  - type: StatusPage
+    url: https://status.env0.com
+  - type: Compliance
+    url: https://docs.envzero.com/guides/overview/security-overview
+  - type: LLMsTxt
+    url: llms/env0-llms.txt
+  - type: AgentCard
+    url: a2a/env0-a2a.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: WellKnown
+    url: well-known/env0-well-known.yml
+  - type: MCPServer
+    url: mcp/env0-mcp.yml
+  - type: Packages
+    url: packages/env0-packages.yml
+  - type: SDKs
+    url: packages/env0-packages.yml
+  - type: CLI
+    url: cli/env0-cli.yml
+  - type: ChangeLog
+    url: changelog/env0-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/env0-lifecycle.yml
+  - type: Conventions
+    url: conventions/env0-conventions.yml
+  - type: Conformance
+    url: conformance/env0-conformance.yml
+  - type: TrustCenter
+    url: security/env0-trust-center.yml
+  - type: Webhooks
+    url: asyncapi/env0-webhooks.yml
+  - type: DataModel
+    url: data-model/env0-data-model.yml
+  - type: Plans
+    url: plans/env0-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/env0-rate-limits.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-06'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v3

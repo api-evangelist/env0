@@ -1,14 +1,111 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/env0-openapi.yml
+generated: '2026-09-06'
+method: searched
+source: https://docs.envzero.com/guides/admin-guide/user-role-and-team-management/api-keys
+docs: https://docs.envzero.com/guides/admin-guide/user-role-and-team-management/api-keys
+note: >-
+  Upgraded from derived to searched 2026-09-06 against env zero's own documentation. The REST API
+  uses HTTP Basic only - API Key ID as username, API Key Secret as password. There is no OAuth
+  authorization server, no bearer token endpoint and no scope vocabulary for the API, so no
+  scopes/ artifact is written; RBAC is attached to the KEY, not to the token.
 summary:
-  types:
-  - http
+  types: [http]
+  http_schemes: [basic]
+  api_key_in: []
+  oauth2_flows: []
+  scoped_tokens: false
+  rbac: true
 schemes:
 - name: basicAuth
   type: http
   scheme: basic
-  description: HTTP Basic Authentication. Username is the env0 API Key ID and the password is
-    the API Key Secret, both created in the env0 organization settings.
-  sources:
-  - openapi/env0-openapi.yml
+  description: HTTP Basic Authentication. Username is the env zero API Key ID, password is the API
+    Key Secret. Both are created in Organization Settings -> API Keys.
+  sources: [https://docs.envzero.com/guides/admin-guide/user-role-and-team-management/api-keys]
+  applies_to: https://api.env0.com (all published operations)
+credentials:
+  key_types:
+  - name: Admin API key
+    permissions: any request requiring admin permission - organization settings, deploying and
+      approving environments
+    default: true
+  - name: User (non-admin) API key
+    permissions: RBAC-scoped - specific project permissions, team assignment, treated like any
+      other user
+  - name: Personal API key
+    permissions: the same permissions the issuing user has in their env zero account
+    self_serve: true
+    note: every user can generate one
+  creation: Organization Settings -> API Keys, or POST /api-keys
+  secret_visibility: shown once at creation; not retrievable afterwards
+  revocation: deleting a key can take up to 1 hour to fully expire
+  rotation_policy: none published
+  expiry: none published
+environment_variables:
+  cli_and_ci:
+  - ENV0_API_KEY_ID
+  - ENV0_API_SECRET
+  mcp_server:
+  - ENV0_API_KEY
+  - ENV0_API_SECRET
+  - ENV0_ORGANIZATION_ID
+  note: >-
+    The variable names are NOT consistent across env zero's own tooling. The CLI v2 reads
+    ENV0_API_KEY_ID (renamed from ENV0_API_KEY in the v1 -> v2 migration) while the official MCP
+    server README still uses ENV0_API_KEY. Both are current provider documentation as of
+    2026-09-06.
+other_authentication_surfaces:
+- name: SCIM bearer token
+  type: http
+  scheme: bearer
+  applies_to: the per-organization SCIM 2.0 endpoint (/scim/v2/*)
+  issuance: generated in Organization Settings -> SSO -> SCIM Provisioning
+  visibility: shown once
+  rotation: supported; the previous token stays valid for a grace window (default 24h) then is revoked
+  revocation: deleting the SCIM configuration revokes immediately
+  operations: [GET/POST/DELETE SCIM Configuration, Rotate SCIM Token, Update SCIM Mode, Reconcile SCIM State]
+- name: OIDC (outbound)
+  type: openIdConnect
+  direction: env zero is the ISSUER
+  applies_to: workload identity from a deployment to AWS, Azure, GCP or HashiCorp Vault
+  detail: since July 2026 the token audience can be per-cloud-provider rather than one shared audience
+  docs: https://docs.envzero.com/guides/integrations/oidc-integrations
+- name: SSO (human sign-in)
+  type: saml2 / oidc
+  providers: [SAML 2.0 (Okta, OneLogin, Google Workspace, JumpCloud), Azure AD / Microsoft Entra ID]
+  self_service: true
+  docs: https://docs.envzero.com/guides/sso-integrations/self-service-sso
+- name: VCS OAuth
+  type: oauth2
+  direction: env zero is the CLIENT
+  applies_to: GitHub.com, GitLab.com, Bitbucket.org connections
+  self_hosted_alternative: SSH keys or HTTPS access tokens
+- name: Agent access token
+  applies_to: self-hosted Kubernetes or standalone Docker agent registration
+  docs: https://docs.envzero.com/guides/admin-guide/self-hosted-kubernetes-agent/overview
+- name: Agent secrets
+  applies_to: per-agent secrets, created once and revocable ("immediate and irreversible")
+network_controls:
+  ip_allowlisting:
+    available: true
+    scope: per-organization - UI logins, API keys and the Agent API
+    protocols: [IPv4, IPv6, subnets]
+    default: no allowlist means all IPs allowed
+    enablement: contact the env zero account team or support
+    docs: https://docs.envzero.com/changelogs/2026/05/ip-allowlisting
+  egress_ips_published: true
+  egress_ips_docs: https://docs.envzero.com/guides/admin-guide/custom-flows#faq
+discovery:
+  openid_configuration: absent
+  oauth_authorization_server: absent
+  oauth_protected_resource: absent
+  probed: '2026-09-06'
+  probed_hosts: [env0.com, www.env0.com, envzero.com, www.envzero.com, api.env0.com, docs.envzero.com, app.env0.com, status.env0.com]
+  see: well-known/env0-well-known.yml
+unauthenticated_behavior:
+  url: https://api.env0.com/
+  status: 403
+  body: '{"message":"Missing Authentication Token"}'
+  note: the AWS API Gateway default response, not an env zero error contract. It returns the same
+    body for every path, so a 403 here does not distinguish a real endpoint from one that does
+    not exist.
+  fetched: '2026-09-06'

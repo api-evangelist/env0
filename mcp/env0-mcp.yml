@@ -1,0 +1,118 @@
+generated: '2026-09-06'
+method: searched
+status: published
+source: https://github.com/env0/mcp-server
+note: >-
+  env zero ships TWO distinct MCP surfaces. (1) The official PLATFORM MCP server -
+  github.com/env0/mcp-server, Apache-2.0, distributed as the Docker image env0/mcp-server and
+  run over stdio with ENV0_API_KEY / ENV0_API_SECRET / ENV0_ORGANIZATION_ID. It exposes 14
+  environment, deployment and Cloud Compass tools. (2) A hosted REMOTE docs MCP server at
+  https://docs.envzero.com/mcp, served by Mintlify on the provider's own docs host, which
+  answers tools/list anonymously with 3 documentation-search tools. Only the second is callable
+  by an agent without a human first installing something, which is why both are recorded.
+deployment:
+  mode: both
+  endpoint: https://docs.envzero.com/mcp
+  endpoint_scope: documentation-search only (Mintlify-hosted docs MCP on the provider's docs host)
+  install: 'docker run -i --rm -e ENV0_API_KEY=<key> -e ENV0_API_SECRET=<secret> -e ENV0_ORGANIZATION_ID=<org> env0/mcp-server'
+  package: https://github.com/env0/mcp-server
+  container: https://hub.docker.com/r/env0/mcp-server
+  auth: api-key
+  verified: probed
+servers:
+- name: env0-docs
+  kind: remote
+  transport: http
+  url: https://docs.envzero.com/mcp
+  auth: none
+  probe:
+    method: tools/list
+    http_status: 200
+    content_type: text/event-stream
+    fetched: '2026-09-06'
+    tools_returned: 3
+    saved_as: mcp/env0-docs-mcp-tools-list.json
+  tools:
+  - name: search_env_zero_docs
+    title: Search documentation
+    description: Search across the env zero docs knowledge base to find relevant information, code examples and API references.
+    input_schema_properties: [query]
+  - name: query_docs_filesystem_env_zero_docs
+    description: Run a read-only shell-like query against a virtualized, in-memory filesystem containing the documentation.
+    input_schema_properties: [command]
+  - name: submit_feedback
+    title: Submit documentation feedback
+    description: Report a problem with this documentation site so the docs team can fix it.
+    input_schema_properties: [path, feedback]
+- name: env0
+  kind: local-stdio
+  transport: stdio
+  repository: https://github.com/env0/mcp-server
+  license: Apache-2.0
+  language: TypeScript
+  last_pushed: '2026-09-03'
+  auth: api-key
+  auth_env:
+  - ENV0_API_KEY
+  - ENV0_API_SECRET
+  - ENV0_ORGANIZATION_ID
+  source_of_tools: https://github.com/env0/mcp-server/tree/main/src/mcp/tools
+  tools:
+  - name: get-projects
+    title: Get Projects
+    description: Get the projects from env0
+  - name: get-environments
+    title: Get Environments
+    description: Get the environments from env0
+  - name: get-deployment-context
+    title: Get Deployment Context
+  - name: search-deployments
+    title: Search Deployments
+  - name: get-plan-logs
+    title: Get Plan Logs
+  - name: get-error-analysis
+    title: Get Error Analysis
+    description: Analyzes errors in the latest deployment of an environment. For historical deployments use get-deployment-context instead.
+  - name: deploy-environment
+    title: Deploy Environment
+    description: Creates a new deployment for an existing env0 environment. This action ALWAYS requires approval from the user before execution.
+  - name: cancel-environment
+    title: Cancel Environment
+    description: Cancel an environment
+  - name: abort-environment
+    title: Abort Environment
+    description: Abort an environment
+  - name: approve-environment
+    title: Approve Environment
+    description: Approve an environment
+  - name: get-cloud-resources
+    title: Get Cloud Resources
+    description: Get cloud resources from env0
+  - name: get-cloud-configurations
+    title: Get Cloud Configurations
+    description: Get the compass cloud configurations
+  - name: generate-iac
+    title: Generate Infrastructure as Code
+    description: Generate Infrastructure as Code (IaC) for cloud resources. Initiates a long-running job and returns a job ID.
+  - name: check-iac-job-status
+    title: Check IaC Job Status
+    description: Check the status and retrieve results of an IaC generation job started by generate-iac.
+clients_documented:
+- Cursor
+- Claude Code
+- Claude Desktop
+- VS Code
+- Windsurf
+- Cline
+- Zed
+- Roo Code
+- Augment Code
+- Gemini CLI
+- OpenAI Codex
+- JetBrains AI Assistant
+- Kiro
+- Trae
+- Amazon Q Developer CLI
+- Warp
+- LM Studio
+- Opencode

@@ -1,0 +1,168 @@
+generated: '2026-09-06'
+method: derived
+source: mcp/env0-mcp.yml + https://docs.envzero.com/api-reference (327 published operations)
+note: >-
+  IMPORTANT PROVENANCE CAVEAT. This crosswalk binds MCP tools to REST operations by PATH AND
+  METHOD as published on docs.envzero.com, not to operationIds in this repository's openapi/
+  files. The repo's openapi/_original/env0-openapi.yml declares itself a "Best-effort spec
+  derived from publicly documented surfaces; not exhaustive" and its operationIds are
+  API-Evangelist-authored, not the provider's: e.g. the repo says getUserVcsProviderMappings
+  where env zero's own reference says users-get-vcs-provider-user-mappings for the same path.
+  env zero does not serve a raw OpenAPI document (docs.envzero.com/llms.txt advertises
+  /api-reference/openapi.yml but that path 404s; /api-reference/openapi.json returns the
+  unmodified Mintlify "OpenAPI Plant Store" sample and is NOT env zero's spec). Binding to the
+  repo's invented ids would launder a scaffold into a crosswalk, so the rest[] column carries
+  METHOD + PATH, which is verifiable against the provider's published reference.
+surfaces:
+  openapi:
+    published_raw_spec: false
+    advertised_at: https://docs.envzero.com/api-reference/openapi.yml
+    advertised_status: 404
+    false_positive: https://docs.envzero.com/api-reference/openapi.json returns Mintlify's default
+      "OpenAPI Plant Store" sample - not env zero's contract, and deliberately not saved
+    rendered_reference: https://docs.envzero.com/api-reference
+    operations_published: 327
+    repo_spec: openapi/_original/env0-openapi.yml
+    repo_spec_operations: 14
+    repo_spec_is_first_party: false
+  mcp:
+    remote: https://docs.envzero.com/mcp
+    remote_gated: false
+    remote_scope: documentation search only
+    local_stdio: env0/mcp-server (Docker, stdio)
+    local_gated: true
+    local_tools_source: https://github.com/env0/mcp-server/tree/main/src/mcp/tools
+  graphql: null
+crosswalk:
+- tool: get-projects
+  server: env0
+  category: projects
+  rest:
+  - GET /projects
+  binding: rest
+  confidence: high
+- tool: get-environments
+  server: env0
+  category: environments
+  rest:
+  - GET /environments
+  binding: rest
+  confidence: medium
+  note: env zero's reference publishes several environment list surfaces (organization, project,
+    outputs, tags); the tool wraps the primary environment list.
+- tool: deploy-environment
+  server: env0
+  category: deployments
+  rest:
+  - POST /environments/{id}/deploy
+  binding: rest
+  confidence: high
+  note: endpoint published verbatim in env zero's own agent skill (skills/env0-envzero.md, "Core
+    API endpoints" table).
+- tool: cancel-environment
+  server: env0
+  category: deployments
+  rest:
+  - PUT /environments/deployments/{id}/cancel
+  binding: rest
+  confidence: high
+- tool: abort-environment
+  server: env0
+  category: deployments
+  rest:
+  - POST /environments/deployments/{id}/abort
+  binding: rest
+  confidence: high
+- tool: approve-environment
+  server: env0
+  category: deployments
+  rest:
+  - PUT /environments/deployments/{id}
+  binding: rest
+  confidence: medium
+  note: env zero exposes approval as "Resume Deployment" (PUT /environments/deployments/{id});
+    the tool name and the operation name differ.
+- tool: get-plan-logs
+  server: env0
+  category: deployments
+  rest:
+  - GET /deployments/{id}
+  binding: rest
+  confidence: medium
+  note: deployment log retrieval; the docs also expose a Deployment Logs section with several
+    step-level surfaces.
+- tool: search-deployments
+  server: env0
+  category: deployments
+  rest:
+  - GET /environments/deployments
+  binding: rest
+  confidence: low
+  note: named by semantics; the exact search surface is not individually identified in the
+    public reference index.
+- tool: get-cloud-resources
+  server: env0
+  category: cloud-compass
+  rest:
+  - GET /cloud/environments/{environmentId}/state-resources
+  binding: rest
+  confidence: medium
+- tool: get-cloud-configurations
+  server: env0
+  category: cloud-compass
+  rest:
+  - GET /cloud/configurations
+  binding: rest
+  confidence: low
+  note: Cloud Compass configuration surface; path inferred from the sibling /cloud/* operations,
+    not read verbatim from the reference.
+- tool: generate-iac
+  server: env0
+  category: cloud-compass
+  rest:
+  - POST /cloud/resources/codify
+  binding: rest
+  confidence: high
+- tool: search_env_zero_docs
+  server: env0-docs
+  category: documentation
+  rest: []
+  binding: none
+  confidence: high
+  note: documentation search, backed by the Mintlify docs index rather than the env zero API.
+mcp_only:
+- tool: get-deployment-context
+  reason: server-side composite - aggregates environment state, recent deployments and a drift or
+    failure summary into one response. No single REST operation returns it.
+- tool: get-error-analysis
+  reason: wraps env zero's AI error-insights feature over the latest deployment; no public REST
+    operation is documented for it.
+- tool: check-iac-job-status
+  reason: polls the asynchronous job started by generate-iac; the job-status surface is not
+    individually published in the REST reference.
+- tool: query_docs_filesystem_env_zero_docs
+  reason: Mintlify docs-host tool over a virtual in-memory filesystem of the documentation.
+- tool: submit_feedback
+  reason: Mintlify docs-host feedback channel; not an env zero platform operation.
+rest_only:
+- capability: Users, teams, roles and RBAC
+  note: includes the full SCIM 2.0 provisioning surface (configuration, token rotation, group
+    mappings, reconcile) - no MCP tool touches identity at all.
+- capability: Templates, Modules and the private Provider Registry
+- capability: Approval Policies, Policies and governance controls
+- capability: Configuration variables, Credentials and Configuration Sets
+- capability: Cost, Dashboard and budget/threshold surfaces
+- capability: Drift detection and remediation configuration
+- capability: Environment Import / Terraform Cloud migration sessions
+- capability: Notifications and webhook notification targets
+- capability: Audit Events
+- capability: Custom Flow, Scheduling, Remote Backend, Bulk Operations, Code-Optimizer (BETA)
+- capability: Organization settings, Environment Outputs, VCS integration
+coverage:
+  tools_named: 17
+  tools_bound_to_rest: 11
+  mcp_only: 5
+  docs_only_tools: 3
+  rest_operations_published: 327
+  rest_operations_with_a_tool: 11
+  rest_coverage_percent: 3.4

@@ -1,0 +1,83 @@
+generated: '2026-09-06'
+method: searched
+source: https://docs.envzero.com/guides/integrations/notifications/webhooks
+reference: https://docs.envzero.com/api-reference (Webhooks section, 16 documented events)
+spec_type: none
+asyncapi_published: false
+asyncapi_note: >-
+  env zero publishes no AsyncAPI document. It DOES publish a first-class webhook surface - 16
+  named events, each with its own page in the API reference carrying the payload schema, plus a
+  documented envelope, delivery headers and HMAC signature verification. Captured here as a
+  webhook catalog. No AsyncAPI has been authored on env zero's behalf.
+transport: https
+method: POST
+requirement: HTTPS endpoint required
+envelope:
+  format: CloudEvents 1.0 structured JSON (shape, not a declared conformance)
+  fields:
+  - {name: type, description: 'the event type, e.g. com.env-zero.deploy.succeeded'}
+  - {name: source, description: 'URI identifying the source of the event, e.g. https://env0.com'}
+  - {name: id, description: globally unique id identifying the request}
+  - {name: time, description: ISO 8601 timestamp}
+  - {name: datacontenttype, description: application/json}
+  - {name: data, description: event data, JSON encoded; schema defined by the event type}
+headers:
+- {name: User-Agent, value: env0-webhook}
+- {name: x-env-zero-notification-target-id, description: id of the notification target the request was sent to}
+- {name: x-env-zero-event, description: 'the event type, e.g. com.env-zero.deploy.succeeded'}
+- {name: x-env-zero-event-id, description: globally unique id identifying the delivery}
+- {name: x-env-zero-signature, description: HMAC hash signature, present only when a secret is configured}
+headers_note: >-
+  env zero's own documentation still shows the LEGACY x-env0-* header names in its worked request
+  example while the header table above it lists x-env-zero-*. Both appear on the same page as of
+  2026-09-06. An integrator should be prepared for either; this is a documentation defect worth
+  reporting to the provider.
+signature:
+  supported: true
+  optional: true
+  mechanism: HMAC hash over the delivery, keyed by a per-target secret
+  header: x-env-zero-signature
+  guidance: choose a random high-entropy string and store it where it can be retrieved for
+    verification
+delivery_targets:
+  types: [Webhook, Slack, Microsoft Teams, Email]
+  scope: notification targets are created at organization level and associated with projects
+  management_operations:
+  - 'POST /notifications/endpoints/{endpointId}/test - send a test event and inspect the request and response'
+  test_response_envelope: 'request{url,method,headers,body}, response{headers,statusCode,body}, error{type: timeout|ssl-error|unknown, message}'
+events:
+- {name: com.env0.deploy.succeeded, title: Deploy succeeded, description: fired when a deploy has finished successfully}
+- {name: deploy.failed, title: Deploy failed, description: fired when a deploy has failed}
+- {name: deployment.started, title: Deployment started, description: fired when a deployment has started}
+- {name: deployment.cancelled, title: Deployment cancelled, description: fired when a deployment has been cancelled}
+- {name: deployment.resumed, title: Deployment resumed, description: fired when a deployment has been resumed after an approval}
+- {name: deployment.waiting-for-user, title: Deployment waiting for user, description: fired when a deployment requires an approval}
+- {name: destroy.started, title: Destroy started, description: fired when a destroy has started}
+- {name: destroy.succeeded, title: Destroy succeeded, description: fired when a destroy has finished successfully}
+- {name: destroy.failed, title: Destroy failed, description: fired when a destroy has failed}
+- {name: destroy.resumed, title: Destroy resumed, description: fired when a destroy has been resumed after an approval}
+- {name: pr-plan.failed, title: PR plan failed, description: fired when a PR plan has failed}
+- {name: drift.detected, title: Drift detected, description: fired when env zero detects drift in an environment}
+- {name: drift.undetected, title: Drift undetected, description: fired when a drift has been reconciled}
+- {name: drift.failed, title: Drift failed, description: fired when drift detection fails to complete}
+- {name: environment.marked-for-auto-destroy, title: Environment marked for auto destroy, description: fired when an environment is marked for auto destroy by a TTL policy}
+- {name: budget.exceeded, title: Budget exceeded, description: fired when a Budget Exceeded event has been triggered}
+- {name: com.env0.webhook.test, title: Test event, description: sent by the 'Send test event' button and the test endpoint}
+events_note: >-
+  Only two full event-type strings are published verbatim in the guide
+  (com.env0.deploy.succeeded, com.env0.webhook.test) alongside one in the header table using the
+  newer reverse-DNS prefix (com.env-zero.deploy.succeeded). The remaining rows carry env zero's
+  own event TITLES and descriptions from its reference; the `name` values for those are
+  API-Evangelist shorthand, NOT provider-published strings, and must not be used as literals.
+  Each event's payload schema is published on its own page under
+  https://docs.envzero.com/api-reference/webhooks/.
+event_count: 16
+streaming:
+  present: false
+  note: no websocket, SSE, Kafka or event-stream surface. The one server-sent-events channel on
+    the estate is the Mintlify docs MCP transport, which is not an env zero event surface.
+log_forwarding:
+  present: true
+  note: deployment and audit logs can be forwarded to Amazon CloudWatch, Amazon S3 and Dynatrace
+    via OIDC. A push data channel, though not a webhook.
+  docs: https://docs.envzero.com/guides/integrations/logs-forwarding/cloudwatch

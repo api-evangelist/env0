@@ -1,0 +1,73 @@
+generated: '2026-09-06'
+method: searched
+probe: true
+url: https://docs.envzero.com/guides/overview/security-overview
+note: >-
+  env zero has NO dedicated trust centre. trust.env0.com and trust.envzero.com do not resolve;
+  https://www.envzero.com/security and /trust both return 404. What it publishes instead is a
+  single "Security overview" page inside the documentation, which does name a real attestation
+  and describe the architecture. That page is recorded here as the compliance surface.
+certifications:
+- name: SOC 2 Type II
+  scope: entire service offering
+  latest_report_issued: '2025-11'
+  self_serve: false
+  availability: on request from your account manager
+certifications_absent:
+- ISO 27001
+- ISO 27017
+- ISO 27018
+- PCI DSS
+- HIPAA
+- FedRAMP
+- CSA STAR
+- FIPS 140
+security_posture:
+  hosting: AWS
+  edge: API Gateway + CloudFront + WAF
+  account_isolation: multiple AWS accounts; separate development account
+  internal_access: AWS SSO with MFA
+  encryption_in_transit: HTTPS / SSH only
+  encryption_at_rest: S3, RDS and DynamoDB encryption
+  sensitive_variables: encrypted and unavailable in UI, logs or API - including to env zero staff
+  deployment_isolation: single-use sandboxed Docker container per deployment, destroyed afterwards
+  base_image: node alpine
+  hybrid_option: self-hosted agent keeps secrets and IaC runs inside the customer's cloud account
+  ip_allowlisting: per-organization IPv4/IPv6 allowlist over UI logins, API keys and the Agent API
+  sso: SAML 2.0, Azure AD / Microsoft Entra ID, SCIM 2.0 provisioning
+published_risk_register:
+  present: true
+  note: env zero publishes a "Possible Exploits" section naming risks it does NOT mitigate
+  risks:
+  - malicious code in a linked VCS repository exfiltrating data during PR plan operations
+  - malicious third-party Terraform providers/modules reaching state files and sensitive variables
+  - arbitrary code execution through custom flows, unvalidated and unblocked at deployment time
+evidence:
+- source: https://docs.envzero.com/guides/overview/security-overview
+  status: 200
+  fetched: '2026-09-06'
+  keywords: [soc 2, soc 2 type ii, encryption, sandboxing, sso, scim, mfa]
+- source: https://www.envzero.com/security
+  status: 404
+  fetched: '2026-09-06'
+- source: https://www.envzero.com/trust
+  status: 404
+  fetched: '2026-09-06'
+- source: https://trust.envzero.com/
+  status: dns-nxdomain
+  fetched: '2026-09-06'
+vulnerability_disclosure:
+  present: false
+  note: >-
+    No security.txt on any of the eight hosts probed, no responsible-disclosure page, no bug
+    bounty programme on HackerOne, Bugcrowd or Intigriti, and no security@ address published.
+    The only published contact is support@env0.com. This is a real gap and the cheapest one on
+    this list for env zero to close - an RFC 9116 security.txt at
+    https://www.envzero.com/.well-known/security.txt naming a contact and a policy URL.
+  probed:
+  - {url: 'https://www.envzero.com/.well-known/security.txt', status: 404}
+  - {url: 'https://envzero.com/.well-known/security.txt', status: 404}
+  - {url: 'https://www.env0.com/.well-known/security.txt', status: 404}
+  - {url: 'https://api.env0.com/.well-known/security.txt', status: 403}
+  - {url: 'https://docs.envzero.com/.well-known/security.txt', status: 404}
+  checked: '2026-09-06'

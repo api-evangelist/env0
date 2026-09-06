@@ -1,0 +1,169 @@
+generated: '2026-09-06'
+method: derived
+source: https://docs.envzero.com/api-reference (30 sections, 327 published operations) +
+  https://docs.envzero.com/.well-known/agent-skills/envzero/skill.md +
+  https://docs.envzero.com/guides/getting-started/glossary
+note: >-
+  Derived from env zero's OWN published reference and glossary, not from this repo's openapi/,
+  which is an API Evangelist best-effort scaffold covering 14 of 327 operations. Every entity and
+  relationship below traces to a published operation path or to env zero's glossary. Identifiers
+  are UUIDs throughout - env zero uses no typed id prefixes.
+id_scheme:
+  format: uuid-v4
+  prefixed: false
+  example_fields: [organizationId, projectId, environmentId, deploymentId, templateId, endpointId, agentKey]
+  exception: agents are addressed by `agentKey`, a string key rather than a UUID
+entities:
+- name: Organization
+  description: top-level tenant; owns projects, templates, users, teams, credentials, agents and
+    the subscription
+  section: Organization
+  key_operations: ['GET /organizations/{id}/limits', GET /environments/runs-usage]
+- name: Project
+  description: container for related environments with scoped credentials and access control;
+    supports sub-project hierarchy
+  section: Projects
+  key_operations: [GET /projects, 'PUT /policies']
+- name: Template
+  description: reusable IaC configuration pointing at a VCS repository, folder and framework
+  section: Templates
+- name: Environment
+  description: a live deployment of a template with its own state, variables, status, drift status
+    and TTL
+  section: Environments
+  states: [ACTIVE, INACTIVE, DEPLOY_IN_PROGRESS]
+  drift_states: [OK]
+- name: Deployment
+  description: one execution against an environment - deploy, destroy, drift detection, task or
+    PR plan - with steps and logs
+  section: Environments / Deployment Logs
+  key_operations: ['PUT /environments/deployments/{id}', 'PUT /environments/deployments/{id}/cancel', 'POST /environments/deployments/{id}/abort', 'GET /environments/deployments/{id}/resources']
+- name: Module
+  description: private Terraform module in the env zero registry
+  section: Modules
+- name: Provider
+  description: private Terraform provider in the env zero registry
+  section: Provider Registry
+- name: Agent
+  description: self-hosted execution agent (Kubernetes or standalone Docker) with its own secrets
+    and project assignments
+  section: Agents Settings
+  key: agentKey
+- name: ConfigurationVariable
+  description: variable or secret scoped to organization, project, template or environment
+  section: Configuration
+- name: ConfigurationSet
+  description: named group of variables reusable across scopes
+  section: Configuration
+- name: Credential
+  description: cloud provider credential (AWS/Azure/GCP/OCI/Kubernetes), by key or OIDC
+  section: Credentials
+- name: ApprovalPolicy
+  description: custom approval flow gating a deployment
+  section: Approval Policy
+- name: Policy
+  description: project-level governance policy - environment limits, TTL, drift detection cron,
+    auto drift remediation mode, approval defaults
+  section: Projects
+- name: Team
+  description: group of users; can be provisioned from an IdP group via SCIM group push
+  section: Teams
+- name: User
+  description: organization member; may be provisioned JIT via SAML or continuously via SCIM
+  section: Users
+- name: Role
+  description: built-in or custom RBAC role, assignable at organization, project or environment level
+  section: Roles / Role Based Access
+- name: ScimConfiguration
+  description: per-organization SCIM 2.0 configuration with a rotating bearer token, provisioning
+    mode and group mappings
+  section: Users
+- name: ApiKey
+  description: Admin, User or Personal API key; the credential for HTTP Basic auth
+  section: Credentials
+- name: NotificationTarget
+  description: webhook, Slack, Teams or email destination, associated with projects
+  section: Notifications
+- name: Webhook
+  description: an event delivery against a notification target
+  section: Webhooks
+- name: CloudResource
+  description: a discovered cloud resource in Cloud Compass, IaC-managed or unmanaged
+  section: Cloud Compass
+- name: CloudConfiguration
+  description: a connected cloud account scanned by Cloud Compass
+  section: Cloud Compass
+- name: IaCGenerationJob
+  description: asynchronous job that codifies selected cloud resources into Terraform or OpenTofu
+  section: Cloud Compass
+  key_operations: [POST /cloud/resources/codify]
+- name: Drift
+  description: divergence between cloud state and code, with cause analysis and remediation mode
+  section: Drift
+- name: CostRecord
+  description: estimated (Infracost) and actual cloud cost attributed to an environment or project
+  section: Cost
+- name: Workflow
+  description: multi-environment orchestration declared in env0.workflow.yaml with dependencies
+  section: Custom Flow
+- name: CustomFlow
+  description: env0.yml step definition injected into the deployment pipeline
+  section: Custom Flow
+- name: EnvironmentOutput
+  description: output variable published by an environment and consumable as another environment's input
+  section: Environment Outputs
+- name: AuditEvent
+  description: immutable record of an organization action, forwardable to CloudWatch, S3 or Dynatrace
+  section: Audit Events
+- name: MigrationSession
+  description: a Terraform Cloud / Terraform Enterprise migration session and its workspace inventory
+  section: Environment Import
+- name: BulkOperation
+  description: a batched deploy, destroy, approve or cancel across many environments, pollable by operationId
+  section: Bulk Operations
+relationships:
+- {from: Organization, to: Project, kind: has_many, via: organizationId}
+- {from: Organization, to: Template, kind: has_many, via: organizationId}
+- {from: Organization, to: User, kind: has_many, via: organizationId}
+- {from: Organization, to: Team, kind: has_many, via: organizationId}
+- {from: Organization, to: Agent, kind: has_many, via: organizationId}
+- {from: Organization, to: ApiKey, kind: has_many, via: organizationId}
+- {from: Organization, to: ScimConfiguration, kind: has_one, via: organizationId}
+- {from: Organization, to: NotificationTarget, kind: has_many, via: organizationId}
+- {from: Organization, to: CloudConfiguration, kind: has_many, via: organizationId}
+- {from: Project, to: Environment, kind: has_many, via: projectId}
+- {from: Project, to: Policy, kind: has_one, via: projectId}
+- {from: Project, to: Credential, kind: has_many, via: projectId}
+- {from: Project, to: Agent, kind: belongs_to, via: agentKey assignment}
+- {from: Project, to: Project, kind: has_many, via: parent project (sub-project hierarchy)}
+- {from: Environment, to: Template, kind: belongs_to, via: templateId}
+- {from: Environment, to: Deployment, kind: has_many, via: environmentId}
+- {from: Environment, to: ConfigurationVariable, kind: has_many, via: scope=environment}
+- {from: Environment, to: EnvironmentOutput, kind: has_many, via: environmentId}
+- {from: Environment, to: Drift, kind: has_one, via: driftStatus}
+- {from: Environment, to: CostRecord, kind: has_many, via: environmentId}
+- {from: Environment, to: CloudResource, kind: has_many, via: state resources}
+- {from: Deployment, to: ApprovalPolicy, kind: belongs_to, via: requiresApproval}
+- {from: Deployment, to: Webhook, kind: has_many, via: event emission}
+- {from: Template, to: Module, kind: references, via: private registry}
+- {from: Team, to: User, kind: has_many, via: membership}
+- {from: Team, to: Role, kind: has_many, via: role assignment}
+- {from: ScimConfiguration, to: Team, kind: has_many, via: SCIM group mapping}
+- {from: NotificationTarget, to: Project, kind: has_many, via: association}
+- {from: CloudConfiguration, to: CloudResource, kind: has_many, via: discovery scan}
+- {from: CloudResource, to: IaCGenerationJob, kind: has_many, via: cloudResourceIds}
+- {from: Workflow, to: Environment, kind: has_many, via: env0.workflow.yaml dependencies}
+- {from: MigrationSession, to: Environment, kind: has_many, via: migrated workspaces}
+domains:
+- {name: Provisioning, entities: [Template, Environment, Deployment, Workflow, CustomFlow, EnvironmentOutput]}
+- {name: Governance, entities: [Policy, ApprovalPolicy, Role, AuditEvent]}
+- {name: Identity, entities: [User, Team, Role, ScimConfiguration, ApiKey]}
+- {name: Cloud discovery, entities: [CloudConfiguration, CloudResource, IaCGenerationJob, Drift]}
+- {name: FinOps, entities: [CostRecord]}
+- {name: Registry, entities: [Module, Provider]}
+- {name: Integration, entities: [NotificationTarget, Webhook, Agent, Credential]}
+coverage:
+  entities: 30
+  relationships: 32
+  reference_sections: 30
+  reference_operations: 327

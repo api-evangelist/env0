@@ -4,10 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Env0
 providerId: env0
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-09-06'
 tags:
   - FinOps
   - Infrastructure as Code
@@ -15,77 +12,72 @@ tags:
   - Cloud
   - Rate Limiting
   - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Env0 API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Env0
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Env0
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Env0
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Env0
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Env0
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+description: >-
+  What env zero actually publishes about API consumption limits. REPLACES the 2026-05-04 API
+  Evangelist bulk-sweep scaffold that previously occupied this file, whose figures (10 rpm free,
+  100 rpm professional, X-RateLimit-* headers, 429/503 codes) were never published by env zero
+  and could not be confirmed on any provider surface. Those values are removed rather than kept,
+  because a scaffold number in this slot reads downstream as a provider-published limit.
+generated: '2026-09-06'
+method: searched
+source: https://docs.envzero.com (full docs search via the provider's own docs MCP server, 2026-09-06)
+limit_count: 0
+http_rate_limits_published: false
+note: >-
+  env zero publishes NO HTTP rate limit for https://api.env0.com. A full search of the current
+  documentation (211 guide pages, 327 API reference pages, 119 changelog pages) surfaced no
+  requests-per-second/minute figure, no 429 documentation, no X-RateLimit-*/RateLimit-* header
+  reference and no Retry-After guidance. The figure "1,000 requests per 60 seconds" carried in
+  this repo's apis.yml and its scaffold OpenAPI could not be located on any current env zero
+  surface; it may date from the retired ReadMe.io docs site. It is recorded here as UNVERIFIED
+  rather than asserted.
+unverified_claims:
+- claim: 1,000 requests per 60 seconds
+  carried_in: [apis.yml, 'openapi/_original/env0-openapi.yml (info.description)']
+  status: unverified
+  checked: '2026-09-06'
+  reason: not present in the current docs at docs.envzero.com
+response_headers:
+  limit: null
+  remaining: null
+  reset: null
+  retry_after: null
+  policy: null
+  observed: false
+  observation_note: api.env0.com answers unauthenticated requests with 403 {"message":"Missing
+    Authentication Token"} and no rate-limit headers, so nothing could be observed anonymously.
+status_code_on_exhaustion: null
+limits: []
+account_quotas:
+  note: >-
+    What env zero DOES publish are plan-level consumption quotas, enforced per organization rather
+    than per API key, and readable over the API itself. These are the real ceiling an integrator
+    hits - not a requests-per-second cap.
+  source: https://docs.envzero.com/guides/billing/subscription-tiers
+  quotas:
+  - {scope: per-organization, plan: Free, metric: runs, limit: 250, window: month, reset: start of month UTC}
+  - {scope: per-organization, plan: Free, metric: active_environments, limit: 30}
+  - {scope: per-organization, plan: Free, metric: concurrent_deployments, limit: 1}
+  - {scope: per-organization, plan: Free, metric: run_duration_minutes, limit: 20}
+  - {scope: per-organization, plan: Cloud Navigator, metric: active_environments, limit: 100}
+  - {scope: per-organization, plan: Cloud Navigator, metric: runs, limit: null, note: unlimited}
+  - {scope: per-organization, plan: Cloud Pilot, metric: active_environments, limit: null, note: unlimited}
+  - {scope: per-project, metric: active_environments, limit: configurable, note: 'set by policy - PUT /policies numberOfEnvironments / numberOfEnvironmentsTotal'}
+  exhaustion_behavior:
+    user_triggered: blocked
+    unattended: silently skipped (continuous deployment, scheduled deployments, drift remediation, TTL destroys) with no notification
+  runtime_signal:
+  - {operation: GET /environments/runs-usage, returns: 'count and limit (count is null for uncapped orgs)'}
+  - {operation: 'GET /organizations/{id}/limits', returns: 'environments.limit, environments.amount, environments.limitReached'}
+  - {operation: GET /policies/limits/check, returns: warnings.total, warnings.user, total, user}
+  runtime_signal_note: >-
+    An agent CAN read its own remaining quota before acting - three published operations return
+    limit and current usage. That is a genuine agent-readiness strength and it substitutes, in
+    part, for the absent response-header signal.
+access_controls:
+  ip_allowlisting:
+    available: true
+    scope: per-organization, covering UI logins, API keys and the Agent API
+    protocols: [IPv4, IPv6, subnets]
+    enablement: contact env zero account team or support
+    docs: https://docs.envzero.com/changelogs/2026/05/ip-allowlisting

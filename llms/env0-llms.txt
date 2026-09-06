@@ -1,0 +1,24 @@
+# env zero docs
+
+- [Guides (211 pages)](https://docs.envzero.com/_llms/guides.md): Documentation for Guides.
+- [API reference (327 pages)](https://docs.envzero.com/_llms/api-reference.md): Documentation for API reference.
+- [Changelog (119 pages)](https://docs.envzero.com/_llms/changelog.md): Documentation for Changelog.
+
+## OpenAPI Specs
+
+- [openapi](/api-reference/openapi.yml)
+
+## Optional
+
+- [Terraform Provider](https://registry.terraform.io/providers/env0/env0/latest)
+- [Status Page](https://status.env0.com)
+- [Schedule a Demo](https://www.envzero.com/demo-request)
+- [Start Free](https://app.env0.com/)
+
+> The links below point to documentation indexes. Follow each `/_llms/` index recursively until you reach documentation pages.
+
+## Indexes
+
+- [Guides (211 pages)](https://docs.envzero.com/_llms/guides.md): Documentation for Guides.
+- [API reference (327 pages)](https://docs.envzero.com/_llms/api-reference.md): Documentation for API reference.
+- [Changelog (119 pages)](https://docs.envzero.com/_llms/changelog.md): Documentation for Changelog.

@@ -1,0 +1,69 @@
+generated: '2026-09-06'
+method: searched
+source: https://docs.envzero.com/guides/community-and-resources/support-and-help/support
+versioning:
+  scheme: none
+  current: null
+  docs: null
+  note: >-
+    api.env0.com serves unversioned paths. No URI version segment, no version header, no
+    published API versioning policy. Probed 2026-09-06.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  deprecation_header: unknown
+  note: >-
+    No published API deprecation or sunset policy. env zero DOES mark individual operations
+    "Deprecated" in its reference and names the replacement, and it has announced at least one
+    breaking infrastructure change in the changelog with a month of lead time
+    (2023-11 egress IP expansion, effective 2023-12-04). What is missing is a stated policy -
+    no notice period, no Sunset/Deprecation header commitment, no removal schedule.
+deprecated_operations:
+- operation: Get agent values file content
+  url: https://docs.envzero.com/api-reference/agents-settings/get-agent-values-file-content-deprecated
+  note: not supported for agents created via the UI, API, or Terraform provider
+- operation: Get agent .env file content
+  url: https://docs.envzero.com/api-reference/agents-settings/get-agent-env-file-content-deprecated
+- operation: List Project Teams Permissions
+  url: https://docs.envzero.com/api-reference/teams/list-project-teams-permissions
+  replacement: Get Team Role Assignments
+- operation: Update Teams Assignments
+  url: https://docs.envzero.com/api-reference/teams/update-teams-assignments
+  replacement: Create or Update a Role Assignment for a Team
+- operation: Create or Update a single Team to Project Assignment
+  url: https://docs.envzero.com/api-reference/teams/create-or-update-a-single-team-to-project-assignment
+  replacement: Create or Update a Role Assignment for a Team
+- operation: Delete a single Team to Project Assignment
+  url: https://docs.envzero.com/api-reference/teams/delete-a-single-team-to-project-assignment
+  replacement: Remove a Role Assignment for a Team
+deprecated_clients:
+- client: '@env0/cli 1.x'
+  status: deprecated
+  replacement: single-binary env0 CLI 2.x
+  migration_guide: https://docs.envzero.com/guides/community-and-resources/support-and-help/env-zero-cli#migration-from-v1
+  note: npm `latest` still resolves to the deprecated 1.0.25.
+sla:
+  url: https://docs.envzero.com/guides/community-and-resources/support-and-help/support
+  uptime_target: 99.9%
+  applies_to: paid plans only; the Free plan gets community support
+  first_response:
+  - {severity: Critical, silver: 4 hours, gold: 2 hours, platinum: 1 hour}
+  - {severity: Serious, silver: best effort, gold: 8 hours, platinum: 4 hours}
+  - {severity: Minor, silver: best effort, gold: 24 hours, platinum: 24 hours}
+  - {severity: General Guidance, silver: best effort, gold: one week, platinum: 72 hours}
+  coverage_window: 04:00-20:00 ET Monday-Friday, excluding US federal holidays
+  note: first-response targets, explicitly not time-to-resolution.
+support:
+  email: support@env0.com
+  billing_email: ar@env0.com
+  channels: [email, shared Slack channel, shared MS Teams channel, community]
+  docs: https://docs.envzero.com/guides/community-and-resources/support-and-help/support
+status_page: https://status.env0.com
+status_page_probed:
+  url: https://status.env0.com/
+  status: 200
+  fetched: '2026-09-06'
+  note: still on the env0.com domain after the envzero.com rebrand; status.envzero.com does not
+    resolve.
+roadmap: null
+roadmap_note: no public roadmap found; https://www.envzero.com/roadmap returns 404.

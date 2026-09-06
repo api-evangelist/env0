@@ -1,149 +1,92 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Env0
-providerId: env0
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-tags:
-  - FinOps
-  - Infrastructure as Code
-  - DevOps
-  - Cloud
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+generated: '2026-09-06'
+method: searched
+source: https://docs.envzero.com/guides/billing/subscription-tiers
+pricing_page: https://www.envzero.com/pricing
+docs: https://docs.envzero.com/guides/billing/subscription-tiers
+plan_count: 3
+currency: USD
+note: >-
+  env zero publishes THREE named tiers and a real, complete quota table for the Free tier, but
+  publishes NO price for either paid tier - both say "Pricing per Apply or Environment - get a
+  free quote". So the tier structure and the limits are public; the money is sales-gated. The
+  billing metric itself is disclosed (per Apply or per Environment), which is more than most
+  IaC platforms publish.
 plans:
-  - id: env0-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Env0 API surface. Intended for evaluation, prototyping, and low-volume
-      integrations. Real limits and pricing must be reconciled with the provider's published plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.env0.com/
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://api.env0.com/
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Env0
-  - id: env0-pro
-    name: Professional
-    type: paid
-    description: Production tier for Env0. Provides higher quotas, priority support, and access to the
-      broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.env0.com/
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://api.env0.com/
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.env0.com/
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Env0
-  - id: env0-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Env0. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://api.env0.com/
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://api.env0.com/
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Env0
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- id: free
+  name: env zero Free
+  type: freemium
+  price: '0.00'
+  billing_period: month
+  trial: false
+  trial_note: free forever - no trial period, no credit card, no sales conversation
+  self_serve: true
+  limits:
+  - {metric: runs, limit: 250, period: month, reset: start of month UTC}
+  - {metric: active_environments, limit: 30}
+  - {metric: concurrent_deployments, limit: 1}
+  - {metric: run_duration_minutes, limit: 20}
+  - {metric: self_hosted_agents, limit: 1}
+  - {metric: connected_cloud_accounts_cloud_compass, limit: 1}
+  - {metric: users, limit: null, note: unlimited}
+  run_definition: one successful deploy, destroy or drift detection. Plans, PR plans, dry runs,
+    tasks, module tests and failed or cancelled runs do not count.
+  overage: none
+  overage_behavior: >-
+    At 30 active environments you cannot create new environments until you destroy one or mark it
+    inactive; existing ones keep deploying. At 250 runs, user-triggered deploys/destroys/drift are
+    BLOCKED and unattended runs (continuous deployment, scheduled deployments, drift remediation,
+    TTL destroys) are SKIPPED SILENTLY with no notification.
+  support: community
+  includes:
+  - every Cloud Navigator feature including drift detection and OIDC/SSO
+  - Cloud Compass (one cloud account)
+- id: cloud-navigator
+  name: env zero Cloud Navigator
+  type: paid
+  price: null
+  price_note: 'not published - "Pricing per Apply or Environment - get a free quote"'
+  billing_metric: per Apply or per Environment
+  billing_period: unstated
+  self_serve: false
+  limits:
+  - {metric: runs, limit: null, note: unlimited}
+  - {metric: active_environments, limit: 100}
+  - {metric: concurrent_deployments, limit: null, note: unlimited}
+  - {metric: run_duration_minutes, limit: null, note: no per-run time limit}
+  - {metric: self_hosted_agents, limit: null, note: unlimited}
+  support: Email + dedicated POC + shared Slack/Teams channel (Silver SLA)
+  includes:
+  - IaC Automation & GitOps (GitOps workflows, deploy from PR comments, custom flows, workflows)
+  - Basic Drift Management (detection, cause analysis, code-to-cloud redeployment)
+  - Managed Self-Service (environment discovery, Slack/Teams/email notifications, scheduling, TTL)
+  - Basic Visibility & Dashboards
+  - Private Registry (module & provider registry, module testing)
+  - Access Controls (RBAC, OpenID Connect, SAML, team sync, environment-level access, custom RBAC roles)
+  - Governance & Compliance (custom approval policies, SOC 2 report access)
+  - Basic Integrations (VCS, IaC frameworks)
+- id: cloud-pilot
+  name: env zero Cloud Pilot
+  type: enterprise
+  price: null
+  price_note: 'not published - "Pricing per Apply or Environment - get a free quote"'
+  billing_metric: per Apply or per Environment
+  self_serve: false
+  limits:
+  - {metric: active_environments, limit: null, note: unlimited}
+  support: Enterprise SLA + env zero POC guarantee (Gold/Platinum SLA tiers available)
+  includes:
+  - Cloud Analyst - AI-powered insights, agent and dashboards
+  - Advanced drift cause analysis, remediation and monitoring
+  - Cost Management (Infracost cost estimation, actual cost visibility, centralized cost tagging, cost alerts, budget thresholds)
+  - Self-hosted VCS (Bitbucket, GitLab, GitHub)
+  - Proof-of-Value guarantee
+  - Advanced integrations (IDP, FinOps, observability, PAC/SAST)
+quota_api:
+  note: env zero exposes its own quota state over the API, which is unusual and worth recording.
+  operations:
+  - {path: GET /environments/runs-usage, description: 'monthly-runs limit and, for run-limited orgs, the count of successful deploy/destroy/drift runs this month'}
+  - {path: 'GET /organizations/{id}/limits', description: environment limit, current amount and limitReached flag}
+  - {path: GET /policies/limits/check, description: check whether a new environment meets project limits}
+sign_up: https://app.env0.com/
+contact_sales: https://www.envzero.com/contact-us
+demo_request: https://www.envzero.com/demo-request

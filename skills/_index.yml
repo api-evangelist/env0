@@ -1,0 +1,44 @@
+generated: '2026-09-06'
+method: searched
+source: https://docs.envzero.com/.well-known/agent-skills/envzero/skill.md
+note: >-
+  env zero PUBLISHES its own Agent Skill and advertises it from its A2A agent card
+  (a2a/env0-agent-card.json, skills[0].url). Saved verbatim - not authored by API Evangelist.
+  env zero also ships the skill as a release asset and installs it into coding agents with
+  `env0 skill install` (Claude Code by default; --agent cursor|codex|copilot).
+skills:
+- file: env0-envzero.md
+  name: Envzero
+  id: envzero
+  description: Use when managing infrastructure-as-code deployments, creating and managing cloud
+    environments, orchestrating multi-environment workflows, enforcing governance policies,
+    detecting and remediating infrastructure drift, or automating infrastructure deployments
+    across Terraform, OpenTofu, Pulumi, CloudFormation, Kubernetes, and Helm.
+  method: searched
+  source: https://docs.envzero.com/.well-known/agent-skills/envzero/skill.md
+  http_status: 200
+  content_type: text/markdown
+  bytes: 11903
+  fetched: '2026-09-06'
+  publisher: env zero
+  api: https://docs.envzero.com/api-reference
+  operations:
+  - GET /environments
+  - POST /environments
+  - POST /environments/{id}/deploy
+  - POST /environments/{id}/destroy
+  - GET /deployments/{id}
+  - GET /templates
+  - POST /templates
+  - GET /projects
+  - POST /api-keys
+  - GET /approval-policies
+  operations_note: taken verbatim from the "Core API endpoints" table inside the provider's own
+    skill file; not invented and not derived from this repo's scaffold OpenAPI.
+other_provider_skill_distribution:
+- channel: CLI
+  command: env0 skill install
+  agents: [claude-code, cursor, codex, copilot]
+  docs: https://docs.envzero.com/guides/community-and-resources/support-and-help/env-zero-cli
+- channel: GitHub release asset
+  url: https://github.com/env0/homebrew-tap/releases/latest

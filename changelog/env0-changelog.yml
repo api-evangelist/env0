@@ -1,0 +1,123 @@
+generated: '2026-09-06'
+method: searched
+source: https://docs.envzero.com/changelogs
+docs: https://docs.envzero.com/changelogs
+index: https://docs.envzero.com/_llms/changelog.md
+note: >-
+  env zero publishes a dated, per-release changelog organised by month and year, 119 pages deep,
+  going back to 2022. It is a PRODUCT changelog, not an API changelog: entries describe features,
+  and API additions surface only where a feature adds endpoints (SCIM, bulk operations). There is
+  no separate API version history and no breaking-change register for the REST surface.
+versioning:
+  scheme: none-published
+  api_version_in_url: false
+  api_version_header: false
+  note: >-
+    https://api.env0.com serves unversioned paths (/environments, /projects, ...). No version
+    segment, no version header, and no published API version policy were found. The one versioned
+    thing env zero labels publicly is OIDC token format ("V2 OIDC Tokens", July 2026).
+entry_count_published: 119
+entries:
+- date: '2026-08'
+  title: Full SCIM Provisioning
+  url: https://docs.envzero.com/changelogs/2026/08/scim-full-provisioning
+  type: addition
+  breaking: false
+  highlights: SCIM 2.0 provisioning generally available - provisioning modes, group push to env
+    zero teams, token rotation, and a reconcile check for drift. Adds ~10 REST operations under
+    the Users section.
+- date: '2026-08'
+  title: Search, reworked across env zero
+  url: https://docs.envzero.com/changelogs/2026/08/search-improvements
+  type: improvement
+  breaking: false
+- date: '2026-08'
+  title: Tag Your Environments
+  url: https://docs.envzero.com/changelogs/2026/08/environment-tags
+  type: addition
+  breaking: false
+  highlights: Key-value tags on environments, bulk tag add/remove, tag filters in Explorer.
+- date: '2026-07'
+  title: 'V2 OIDC Tokens: Per-Cloud-Provider Audiences'
+  url: https://docs.envzero.com/changelogs/2026/07/v2-oidc-tokens
+  type: addition
+  breaking: false
+  highlights: OIDC credentials for AWS, Azure, GCP and Vault can use a provider-specific token
+    audience instead of one shared audience.
+- date: '2026-07'
+  title: Say Hello to the New env zero CLI
+  url: https://docs.envzero.com/changelogs/2026/07/cli-for-ai-agents
+  type: addition
+  breaking: true
+  highlights: Single binary replaces the Node package @env0/cli 1.x, which is now deprecated.
+    Renames ENV0_API_KEY -> ENV0_API_KEY_ID and ENV0_API_SECRET -> ENV0_API_KEY_SECRET, targets
+    environments by id rather than name, and prints JSON by default. Adds `env0 skill install`
+    for coding agents. Explicitly "not a drop-in replacement".
+- date: '2026-07'
+  title: Download Your Plan as JSON
+  url: https://docs.envzero.com/changelogs/2026/07/download-plan-as-json
+  type: addition
+  breaking: false
+- date: '2026-07'
+  title: env zero Free Plan
+  url: https://docs.envzero.com/changelogs/2026/07/free-plan
+  type: addition
+  breaking: false
+  highlights: Free-forever tier - 250 runs/month, 30 active environments, community support.
+- date: '2026-05'
+  title: IP Allowlisting for Logins, API Keys, and the Agent API
+  url: https://docs.envzero.com/changelogs/2026/05/ip-allowlisting
+  type: addition
+  breaking: false
+  highlights: Per-organization IPv4/IPv6 allowlist covering UI logins, API keys and the Agent API.
+- date: '2026-05'
+  title: Saved Cloud Plans on the Remote Backend
+  url: https://docs.envzero.com/changelogs/2026/05/saved-cloud-plans-remote-backend
+  type: addition
+  breaking: false
+- date: '2026-04'
+  title: Centralized VCS Connections for All Providers
+  url: https://docs.envzero.com/changelogs/2026/04/vcs-connections-alignment
+  type: improvement
+  breaking: false
+- date: '2026-03'
+  title: 'Self-Service Agent: Create and Manage Agent Pools Without Contacting Support'
+  url: https://docs.envzero.com/changelogs/2026/03/self-service-agent
+  type: addition
+  breaking: false
+- date: '2026-03'
+  title: Simplify Terraform Cloud Migration With the env zero Migration Wizard
+  url: https://docs.envzero.com/changelogs/2026/03/tfc-migration-wizard
+  type: addition
+  breaking: false
+- date: '2026-02'
+  title: 'SCIM Provisioning: Automate User Lifecycle Management'
+  url: https://docs.envzero.com/changelogs/2026/02/scim-provisioning
+  type: addition
+  breaking: false
+- date: '2026-01'
+  title: 'Self-Service SSO: Speed Up Authentication and Stay in Control'
+  url: https://docs.envzero.com/changelogs/2026/01/self-service-sso
+  type: addition
+  breaking: false
+- date: '2025-09'
+  title: 'env zero MCP Server: Fast and Safe Infrastructure Actions from IDEs and Agents'
+  url: https://docs.envzero.com/changelogs/2025/09/env-zero-mcp-server-change-log
+  type: addition
+  breaking: false
+  highlights: First release of the official MCP server - plan, approve and deploy from an IDE or
+    AI agent with env zero governance policies enforced on every run.
+- date: '2023-11'
+  title: BREAKING CHANGE - incoming traffic from env0 extended IP list
+  url: https://docs.envzero.com/changelogs/2023/11/improved-resiliency
+  type: breaking
+  breaking: true
+  highlights: Egress IP list expanded; customers allowlisting env0 static IPs had to add 18 new
+    addresses before 2023-12-04. Cited here as evidence that env zero does announce breaking
+    changes in the changelog with lead time, in the absence of a formal deprecation policy.
+rebrand:
+  note: >-
+    env0 now trades as "env zero". www.env0.com 301s to www.envzero.com and docs.env0.com 301s to
+    docs.envzero.com. The API host, the app host, the status page, the GitHub org, the npm scope
+    and the Terraform provider namespace all remain env0.
+  probed: '2026-09-06'

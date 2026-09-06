@@ -1,0 +1,162 @@
+generated: '2026-09-06'
+method: searched
+source: https://docs.envzero.com/api-reference + https://docs.envzero.com/guides
+note: >-
+  Derived from env zero's own published API reference (327 operations rendered on
+  docs.envzero.com) and its guides - NOT from this repo's openapi/, which is an API
+  Evangelist best-effort scaffold with invented operationIds. Where a convention could not be
+  confirmed from a provider surface it is recorded as unknown rather than assumed.
+base_url: https://api.env0.com
+authentication:
+  style: http-basic
+  detail: API Key ID as the username, API Key Secret as the password
+  key_roles: [Admin, User, Personal]
+  scoped: true
+  scoping_note: non-admin keys carry RBAC - project permissions, team assignment, custom roles
+  secret_shown_once: true
+  revocation_lag: up to 1 hour for a deleted key to fully expire
+  docs: https://docs.envzero.com/guides/admin-guide/user-role-and-team-management/api-keys
+  additional_schemes:
+  - {name: SCIM bearer token, use: SCIM 2.0 provisioning endpoint, rotation: 'supported, previous token valid for a 24h grace window'}
+  - {name: OIDC, use: outbound workload identity to AWS/Azure/GCP/Vault - env zero as the OIDC issuer, not an inbound API auth scheme}
+  - {name: SAML 2.0 / Azure AD SSO, use: human sign-in only}
+idempotency:
+  supported: false
+  coverage: none
+  header: null
+  scope: []
+  retention: null
+  evidence: >-
+    No Idempotency-Key header, no idempotency parameter, and no replay-safety guidance appears
+    anywhere in env zero's 327 published operations, its guides, or its changelog. Searched
+    2026-09-06.
+  mitigations:
+  - mechanism: skipRedundantDeployments
+    kind: server-side de-duplication policy, not client-supplied idempotency
+    scope: project policy (PUT /policies)
+    note: >-
+      env zero can skip a deployment it judges redundant, and skipApplyWhenPlanIsEmpty avoids
+      applying an empty plan. Both reduce the blast radius of an accidental repeat, but neither
+      is an idempotency key - a retrying agent cannot assert "this is the same request".
+  consequence: >-
+    Every mutating operation here provisions or destroys real cloud infrastructure. An agent that
+    retries a POST /environments/{id}/deploy after a timeout has no way to know whether the first
+    call landed. This is the single largest agent-readiness gap in env zero's surface.
+reversibility:
+  grade: documented
+  applies: true
+  note: >-
+    env zero has an unusually rich reversal surface for an infrastructure platform - four distinct
+    ways to take an action back - but publishes NO time or state window for any of them. Grade is
+    `documented` (reversal paths exist and are named) and not `verified` (no window is stated).
+    No window has been invented here.
+  reversals:
+  - action: deployment in flight
+    reversal: cancel
+    operation: PUT /environments/deployments/{id}/cancel
+    cli: env0 deployment cancel <deployment-id>
+    mcp_tool: cancel-environment
+    window: unstated
+    window_note: cancel is understood to apply while the deployment is queued or running; env zero
+      does not publish the boundary.
+  - action: deployment in flight
+    reversal: abort
+    operation: POST /environments/deployments/{id}/abort
+    cli: env0 deployment abort <deployment-id>
+    mcp_tool: abort-environment
+    window: unstated
+    window_note: abort stops a RUNNING deployment; partial infrastructure changes already applied
+      are not automatically rolled back and env zero does not document the resulting state.
+  - action: environment provisioned
+    reversal: destroy
+    operation: POST /environments/{id}/destroy
+    cli: env0 environment destroy <environment-id> --yes
+    window: unbounded
+    window_note: destroy is always available while the environment is ACTIVE, but it deletes real
+      infrastructure - it reverses the env zero record, not necessarily the data.
+  - action: cloud state drifted from code
+    reversal: drift remediation
+    modes: [CODE_TO_CLOUD, CLOUD_TO_CODE, SMART_REMEDIATION]
+    configured_by: PUT /policies (autoDriftRemediation)
+    window: unstated
+  - action: environment retired
+    reversal: mark inactive rather than destroy
+    note: an environment can be marked INACTIVE to free a Free-plan slot without destroying it;
+      no restore window is published.
+  irreversible:
+  - {action: 'Revoke agent secret (DELETE)', note: 'env zero states "immediate and irreversible"'}
+  - {action: environment destroy, note: deletes real cloud infrastructure; not undoable by env zero}
+  human_in_the_loop: >-
+    env zero's own MCP server hard-codes an approval gate on deploy-environment - "This action
+    ALWAYS requires approval from the user before execution" - and the platform supports
+    per-environment and per-run approval policies (requiresApprovalDefault, --requires-approval).
+    That is a real pre-action control substituting for the absent post-action guarantees.
+dry_run_mode:
+  supported: true
+  mechanisms:
+  - {name: plan, note: 'Terraform/OpenTofu plan runs without applying; plan can be downloaded as masked JSON'}
+  - {name: PR plan, note: plan-on-pull-request posts the diff as a VCS comment before merge}
+  - {name: dry run, note: 'dry run support shipped June 2025; does not count against the Free-plan run cap'}
+  - {name: 'SCIM reconcile dryRun=true', operation: 'Reconcile SCIM State', note: 'defaults to dryRun=true - reports a diff only; dryRun=false plus confirm=true applies'}
+  - {name: 'GET /policies/limits/check', note: pre-flight check that a new environment fits project limits}
+pagination:
+  style: page-and-limit
+  params: [page, limit]
+  evidence: 'GET /environment-import/source/sessions/{sessionId}/inventory declares page and limit
+    query parameters'
+  consistency: partial
+  consistency_note: >-
+    Pagination is not applied uniformly. Many list operations in the published reference declare
+    no paging parameters at all and appear to return the full collection. No cursor, no
+    Link header, no total-count envelope is documented.
+  response_fields: unknown
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+metadata:
+  supported: true
+  mechanism: environment tags (key-value), added August 2026; also project tags
+  operations: [GET /environments/tags, GET /projects/tags]
+request_tracing:
+  request_id_header: unknown
+  note: no request-id or correlation-id header is documented for the REST API. Webhook deliveries
+    DO carry x-env-zero-event-id, a globally unique per-delivery id.
+versioning:
+  scheme: none
+  see: lifecycle/env0-lifecycle.yml
+error_envelope:
+  shape: unknown
+  rfc9457: false
+  evidence: >-
+    env zero's published reference documents 200 responses only - no 4xx/5xx schemas appear on any
+    of the 327 operation pages. The one error shape published anywhere is the webhook test result
+    envelope (error.type enum timeout|ssl-error|unknown, error.message) and the bulk-operations
+    per-item envelope (data[].status enum success|failed, data[].error string). An unauthenticated
+    request to api.env0.com returns {"message":"Missing Authentication Token"} - the AWS API
+    Gateway default, not an env zero error contract.
+  observed:
+  - {url: 'https://api.env0.com/', status: 403, body: '{"message":"Missing Authentication Token"}', fetched: '2026-09-06'}
+  see: errors/ - not written; no error catalog is derivable without fabricating one
+rate_limit_signaling:
+  headers: none published
+  see: rate-limits/env0-published-rate-limits.yml
+  quota_introspection: 'GET /environments/runs-usage, GET /organizations/{id}/limits, GET /policies/limits/check'
+bulk_operations:
+  supported: true
+  operations: [POST /bulk-operations/deploy, POST /bulk-operations/approve, POST /bulk-operations/cancel]
+  envelope: 'per-item {environmentId, status: success|failed, error}'
+  polling: 'operationId returned for GET /bulk-operations/{operationId}; documented as optional
+    "while older backends may answer without it"'
+async_jobs:
+  supported: true
+  pattern: submit-then-poll
+  example: 'POST /cloud/resources/codify returns a jobId; poll it (MCP: generate-iac ->
+    check-iac-job-status, "could take up to around 1 minute")'
+cross_links:
+  authentication: authentication/env0-authentication.yml
+  lifecycle: lifecycle/env0-lifecycle.yml
+  rate_limits: rate-limits/env0-published-rate-limits.yml
+  webhooks: asyncapi/env0-webhooks.yml
+  conformance: conformance/env0-conformance.yml
+  mcp: mcp/env0-mcp.yml
