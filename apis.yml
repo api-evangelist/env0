@@ -271,6 +271,8 @@ common:
     url: plans/env0-plans-pricing.yml
   - type: RateLimits
     url: rate-limits/env0-rate-limits.yml
+  - type: Contact
+    url: mailto:support@env0.com
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
