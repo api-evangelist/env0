@@ -90,16 +90,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/env0-agents-api-openapi.yml
-- aid: env0:env0-approvalpolicies-api
-  name: Env0 ApprovalPolicies API
-  description: The ApprovalPolicies API from Env0 — 1 operation(s) for approvalpolicies.
-  humanURL: https://www.envzero.com/
-  baseURL: https://api.env0.com/
-  tags:
-  - ApprovalPolicies
-  properties:
-  - type: OpenAPI
-    url: openapi/env0-approvalpolicies-api-openapi.yml
 - aid: env0:env0-configuration-api
   name: Env0 Configuration API
   description: The Configuration API from Env0 — 1 operation(s) for configuration.
@@ -200,6 +190,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/env0-webhooks-api-openapi.yml
+- aid: env0:env0-approval-policies-api
+  name: Env0 Approval Policies API
+  description: The Approval Policies API from Env0 — 1 operation(s) for approval policies.
+  humanURL: https://www.envzero.com/
+  baseURL: https://api.env0.com/
+  tags:
+  - Approval Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/env0-approval-policies-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/env0-agentic-access.yml
