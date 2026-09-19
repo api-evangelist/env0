@@ -118,6 +118,8 @@ apis:
   humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
+  - Environment
+  tags_raw:
   - Environments
   properties:
   - type: OpenAPI
@@ -196,6 +198,8 @@ apis:
   humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
+  - ApprovalPolicies
+  tags_raw:
   - Approval Policies
   properties:
   - type: OpenAPI
