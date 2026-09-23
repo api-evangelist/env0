@@ -1,17 +1,7 @@
 {
   "provider": "env0",
   "sources": [
-    "env0-agents-api-openapi.yml",
-    "env0-approvalpolicies-api-openapi.yml",
-    "env0-configuration-api-openapi.yml",
-    "env0-deployments-api-openapi.yml",
-    "env0-environments-api-openapi.yml",
-    "env0-modules-api-openapi.yml",
-    "env0-organizations-api-openapi.yml",
-    "env0-projects-api-openapi.yml",
-    "env0-templates-api-openapi.yml",
-    "env0-users-api-openapi.yml",
-    "env0-webhooks-api-openapi.yml"
+    "_original/env0-openapi.yml"
   ],
   "outputs": [
     "env0-agents-api-openapi.yml",
@@ -26,22 +16,28 @@
     "env0-users-api-openapi.yml",
     "env0-webhooks-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
-    "env0-agents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-approvalpolicies-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-configuration-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-deployments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-environments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-modules-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-organizations-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-projects-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-templates-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-users-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "env0-webhooks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "env0-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: env0-approval-policies-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 12 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "env0-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-approval-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-deployments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-environments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-modules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "env0-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
