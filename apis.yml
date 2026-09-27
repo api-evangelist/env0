@@ -50,6 +50,7 @@ tags:
   - Platform Engineering
   - Cloud Governance
   - Drift Detection
+  - A2A
 url: >-
   https://raw.githubusercontent.com/api-evangelist/env0/refs/heads/main/apis.yml
 created: '2026-03-27'
@@ -198,8 +199,6 @@ apis:
   humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
-  - ApprovalPolicies
-  tags_raw:
   - Approval Policies
   properties:
   - type: OpenAPI
@@ -285,3 +284,10 @@ x-enrichment:
   status: enriched
   artifacts_added: 19
   pass: local-v3
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://docs.envzero.com/.well-known/agent-card.json"
+  grade: "conformant"
+  protocol_version: "0.3"
+  control: 404
