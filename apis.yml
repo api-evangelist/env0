@@ -40,6 +40,10 @@ accessModel:
   generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/env0.png
+x-docs-platform: mintlify
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
+x-docs-hosting: vercel
 tags:
   - FinOps
   - Infrastructure as Code
@@ -199,11 +203,16 @@ apis:
   humanURL: https://www.envzero.com/
   baseURL: https://api.env0.com/
   tags:
+  - ApprovalPolicies
+  tags_raw:
   - Approval Policies
   properties:
   - type: OpenAPI
     url: openapi/env0-approval-policies-api-openapi.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/env0-capability-edges.yml
+    name: Env0 Business Capability Map
   - type: AgenticAccess
     url: agentic-access/env0-agentic-access.yml
   - type: DomainSecurity
