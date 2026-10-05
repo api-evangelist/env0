@@ -1,0 +1,34 @@
+slug: env0
+provider: Env0
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Deployments
+  spec_file: env0-deployments-api-openapi.yml
+  capability_id: BC-4210.40
+  capability_id_l1: BC-4210
+  capability_name: Deployment Orchestration
+  confidence: 0.85
+  evidence: POST /environments/{environmentId}/deployments deployEnvironment Trigger a deployment on an
+    environment
+  reason: Operations trigger and inspect deployments of infrastructure changes to an environment — deployment
+    orchestration for a release automation platform.
+- tag: Configuration
+  spec_file: env0-configuration-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.78
+  evidence: POST /configuration upsertConfigurationVariable Create or update a configuration variable
+  reason: CRUD over runtime configuration variables consumed by deployed environments, which is squarely
+    Configuration & Secrets Management within software release and deployment.
