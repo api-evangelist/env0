@@ -90,3 +90,29 @@ quota_api:
 sign_up: https://app.env0.com/
 contact_sales: https://www.envzero.com/contact-us
 demo_request: https://www.envzero.com/demo-request
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  units: []
+  plans:
+  - name: env zero Free
+    access: freemium
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
+  - name: env zero Cloud Navigator
+    access: paid
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: env zero Cloud Pilot
+    access: enterprise
+    model: free
+    model_how: derived
+    units: []
+    periods: []
