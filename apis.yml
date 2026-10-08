@@ -208,6 +208,8 @@ apis:
   - type: OpenAPI
     url: openapi/env0-approval-policies-api-openapi.yml
 common:
+  - type: FinOps
+    url: finops/env0-finops.yml
   - type: CapabilityMap
     url: capabilities/env0-capability-edges.yml
     name: Env0 Business Capability Map
