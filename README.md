@@ -68,6 +68,90 @@ env0 -- now trading as "env zero" -- is an infrastructure-as-code automation and
 
 **Areas:** FinOps · Infrastructure as Code · DevOps · Cloud · Terraform · OpenTofu · Platform Engineering · Cloud Governance · Drift Detection · A2A
 
+## Env0 on APIs.io
+
+Everything profiled for Env0 is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/env0/](https://apis.io/providers/env0/)** — or go straight to one of the APIs or properties below.
+
+### APIs (12)
+
+- [Env0](https://apis.io/apis/env0/env0/) — env0 is an infrastructure-as-code automation platform providing cost estimation, policy enforcement, and self-service environments. The public REST API is…
+- [Env0 Agents API](https://apis.io/apis/env0/env0-agents-api/) — The Agents API from Env0 — 1 operation(s) for agents.
+- [Env0 Configuration API](https://apis.io/apis/env0/env0-configuration-api/) — The Configuration API from Env0 — 1 operation(s) for configuration.
+- [Env0 Deployments API](https://apis.io/apis/env0/env0-deployments-api/) — The Deployments API from Env0 — 2 operation(s) for deployments.
+- [Env0 Environments API](https://apis.io/apis/env0/env0-environments-api/) — The Environments API from Env0 — 2 operation(s) for environments.
+- [Env0 Modules API](https://apis.io/apis/env0/env0-modules-api/) — The Modules API from Env0 — 1 operation(s) for modules.
+- [Env0 Organizations API](https://apis.io/apis/env0/env0-organizations-api/) — The Organizations API from Env0 — 1 operation(s) for organizations.
+- [Env0 Projects API](https://apis.io/apis/env0/env0-projects-api/) — The Projects API from Env0 — 2 operation(s) for projects.
+- [Env0 Templates API](https://apis.io/apis/env0/env0-templates-api/) — The Templates API from Env0 — 1 operation(s) for templates.
+- [Env0 Users API](https://apis.io/apis/env0/env0-users-api/) — The Users API from Env0 — 1 operation(s) for users.
+- [Env0 Webhooks API](https://apis.io/apis/env0/env0-webhooks-api/) — The Webhooks API from Env0 — 1 operation(s) for webhooks.
+- [Env0 Approval Policies API](https://apis.io/apis/env0/env0-approval-policies-api/) — The Approval Policies API from Env0 — 1 operation(s) for approval policies.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Env0 Webhooks](https://apis.io/asyncapis/env0/env0-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [env0-mcp.yml](https://apis.io/servers/env0/env0-mcp-yml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Env0 Agentic Access](https://apis.io/agentic-access/env0/env0-agentic-access/)
+
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [env0 API](https://apis.io/collections/env0/open-env0/)
+- [env0 Agents API](https://apis.io/collections/env0/open-env0-agents-api/)
+- [env0 Agents ApprovalPolicies API](https://apis.io/collections/env0/open-env0-approvalpolicies-api/)
+- [env0 Agents Configuration API](https://apis.io/collections/env0/open-env0-configuration-api/)
+- [env0 Agents Deployments API](https://apis.io/collections/env0/open-env0-deployments-api/)
+- [env0 Agents Environments API](https://apis.io/collections/env0/open-env0-environments-api/)
+- [env0 Agents Modules API](https://apis.io/collections/env0/open-env0-modules-api/)
+- [env0 Agents Organizations API](https://apis.io/collections/env0/open-env0-organizations-api/)
+- [env0 Agents Projects API](https://apis.io/collections/env0/open-env0-projects-api/)
+- [env0 Agents Templates API](https://apis.io/collections/env0/open-env0-templates-api/)
+- [env0 Agents Users API](https://apis.io/collections/env0/open-env0-users-api/)
+- [env0 Agents Webhooks API](https://apis.io/collections/env0/open-env0-webhooks-api/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Env0 Authentication](https://apis.io/security/env0/env0-authentication/)
+- [Env0 Domain Security](https://apis.io/security/env0/env0-domain-security/)
+- [Env0 Trust Center](https://apis.io/security/env0/env0-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Env0 Plans Pricing](https://apis.io/plans/env0/env0-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Env0 Rate Limits](https://apis.io/rate-limits/env0/env0-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Env0 Finops](https://apis.io/finops/env0/env0-finops/)
+
 ## Where to find this API
 
 Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
@@ -85,8 +169,6 @@ Links to the company's own pages. This repository publishes no copy of their spe
 - [Privacy policy](https://www.envzero.com/privacy-policy)
 - [GitHub](https://github.com/env0)
 - [Status](https://status.env0.com)
-
-**APIs profiled:** 12
 
 ## API Evangelist rating
 
@@ -130,3 +212,15 @@ Links to the company's own pages. This repository publishes no copy of their spe
 **Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
 
 The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/env0/](https://apis.io/providers/env0/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Env0: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/env0/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
